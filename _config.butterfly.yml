@@ -163,18 +163,18 @@ cover:
   aside_enable: true
   archives_enable: true
   default_cover: 
-    - /images/covers/cover1.webp
-    - /images/covers/cover2.webp
-    - /images/covers/cover3.webp
-    - /images/covers/cover4.webp
-    - /images/covers/cover5.webp
-    - /images/covers/cover6.webp
+  - /images/covers/cover1.webp
+  - /images/covers/cover2.webp
+  - /images/covers/cover3.webp
+  - /images/covers/cover4.webp
+  - /images/covers/cover5.webp
+  - /images/covers/cover6.webp
    
 # 顏色（HEX值/RGB值/顔色單詞/漸變色)
 # 留空 不顯示背景
 background: /images/background/rover.webp
 
-index_img: '/images/background/head1.webp
+index_img: '/images/background/head1.webp'
 
 # 页面meta显示
 post_meta:
