@@ -401,4 +401,11 @@ preloader:
   # pace theme (see https://codebyzach.github.io/pace/)
   pace_css_url:
 
-
+# Friends link
+friends:
+  layout: flink
+  title: 友情链接
+  desc: 遇见你们很开心
+  button:
+    text: 申请友链
+    url: /comment/  # 指向评论区域，方便别人申请

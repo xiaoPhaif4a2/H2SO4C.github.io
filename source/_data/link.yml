@@ -1,0 +1,18 @@
+- class_name: 超级大神啊
+  class_desc: 给超级大神磕了
+  link_list:
+    - name: 全糖丸山彩
+      link: https://space.bilibili.com/262453807?spm_id_from=333.788.0.0
+      avatar: /images/covers/cover1.webp  # 使用绝对路径
+      descr: 糖丸了
+      # 如果暂时没有站点截图，可以先注释掉siteshot行
+      # siteshot: /images/background/bg1.webp 
+      
+- class_name: 技术大佬
+  class_desc: 这些是我崇拜的技术大神
+  link_list:
+    - name: 全糖丸山彩
+      link: https://space.bilibili.com/262453807?spm_id_from=333.788.0.0
+      avatar: /images/covers/cover1.webp  # 使用绝对路径
+      descr: 糖丸了
+      # siteshot: /images/background/bg1.webp
