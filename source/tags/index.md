@@ -1,6 +1,6 @@
 ---
 title: tags
 date: 2025-10-19 23:42:10
-type: "tags"
+type: "tag"
 layout: tags
 ---
