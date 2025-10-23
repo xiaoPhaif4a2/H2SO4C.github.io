@@ -18,6 +18,7 @@ menu:
     音樂: /music/ || fas fa-music
     照片: /Gallery/ || fas fa-images
     電影: /movies/ || fas fa-video
+  留言板: /comments/ || fas fa-envelope-open
   友鏈: /link/ || fas fa-link
   關於: /about/ || fas fa-heart
 
@@ -180,11 +181,12 @@ index_img: '/images/background/head1.webp'
 
 default_top_img: '/images/background/head1.webp'  
     # 主页顶图
-# archive_img: '/images/covers/cover4.webp'       # 归档页顶图
-# tags_img: '/images/covers/cover5.webp'           # 标签页顶图
-# categories_img: '/images/covers/cover2.webp'      # 分类页顶图
-# link_img: '/images/covers/cover3.webp'          # 友链页顶图
-# about_img: '/images/covers/cover1.webp'         # 关于页顶图
+archive_img: /images/covers/cover4.webp      # 归档页顶图
+
+# tags_img: /images/covers/cover5.webp           # 标签页顶图
+# categories_img: /images/covers/cover2.webp      # 分类页顶图
+# link_img: /images/covers/cover3.webp          # 友链页顶图
+# about_img: /images/covers/cover1.webp        # 关于页顶图
 
 # 页面meta显示
 post_meta:
@@ -419,3 +421,29 @@ friends:
   button:
     text: 申请友链
     url: /comment/  # 指向评论区域，方便别人申请
+
+# lazyload
+lazyload:
+  enable: true           # 启用懒加载
+  onlypost: false        # 是否仅对文章页生效
+
+# envelope_comment
+# see https://akilar.top/posts/e2d3c450/
+envelope_comment:
+  enable: true #控制开关
+  custom_pic:      
+    cover: https://npm.elemecdn.com/hexo-butterfly-envelope/lib/violet.jpg #信笺头部图片
+    line: https://npm.elemecdn.com/hexo-butterfly-envelope/lib/line.png #信笺底部图片
+    beforeimg: https://npm.elemecdn.com/hexo-butterfly-envelope/lib/before.png # 信封前半部分
+    afterimg: https://npm.elemecdn.com/hexo-butterfly-envelope/lib/after.png # 信封后半部分
+  message: #信笺正文，多行文本，写法如下
+    - 有什么想问的？
+    - 有什么想说的？
+    - 有什么想吐槽的？
+    - 哪怕是有什么想吃的，都可以告诉我哦~
+  bottom: 自动书记人偶竭诚为您服务！ #仅支持单行文本
+  height: #1050px，信封划出的高度
+  path: #【可选】comments 的路径名称。默认为 comments，生成的页面为 comments/index.html
+  front_matter: #【可选】comments页面的 front_matter 配置
+    title: 留言板
+    comments: true
