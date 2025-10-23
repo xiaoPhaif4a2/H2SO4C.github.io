@@ -2,6 +2,7 @@
 title: TEST
 description: TESTTEST
 cover: false
+categories: 测试测试
 ---
 # ~~THIS IS A TEST PAGE OF TYPORA~~
 
@@ -9,9 +10,7 @@ cover: false
 
 ## ~~呜呜呜芜湖呼呼~~
 
-
 咳咳，总之就是
-
 
 ***この混沌とした***
 

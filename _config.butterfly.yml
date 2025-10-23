@@ -181,7 +181,7 @@ index_img: '/images/background/head1.webp'
 
 default_top_img: '/images/background/head1.webp'  
     # 主页顶图
-archive_img: /images/covers/cover4.webp      # 归档页顶图
+# archive_img: /images/covers/cover4.webp      # 归档页顶图
 
 # tags_img: /images/covers/cover5.webp           # 标签页顶图
 # categories_img: /images/covers/cover2.webp      # 分类页顶图
@@ -441,6 +441,8 @@ envelope_comment:
     - 有什么想说的？
     - 有什么想吐槽的？
     - 哪怕是有什么想吃的，都可以告诉我哦~
+    - 遗憾的是，因为我没有挂评论系统，所以请当面联系我
+    - 欸嘿~
   bottom: 自动书记人偶竭诚为您服务！ #仅支持单行文本
   height: #1050px，信封划出的高度
   path: #【可选】comments 的路径名称。默认为 comments，生成的页面为 comments/index.html
