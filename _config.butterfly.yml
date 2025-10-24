@@ -422,11 +422,6 @@ friends:
     text: 申请友链
     url: /comment/  # 指向评论区域，方便别人申请
 
-# lazyload
-lazyload:
-  enable: true           # 启用懒加载
-  onlypost: false        # 是否仅对文章页生效
-
 # envelope_comment
 # see https://akilar.top/posts/e2d3c450/
 envelope_comment:
@@ -464,17 +459,17 @@ categoryBar:
   row: 1 #显示行数，默认两行，超过行数切换为滚动显示
   message:
     - descr: 乐队少女的日常
-      cover: 'source/images/covers/cover1.webp'
+      cover: /images/covers/cover1.webp
     - descr: 博客测试界面
-      cover: 'source/images/covers/cover2.webp'
+      cover: /images/covers/cover2.webp
     - descr: 战争电台
-      cover: 'source/images/covers/cover3.webp'
+      cover: /images/covers/cover3.webp
     - descr: 随便乱写，随便乱放
-      cover: 'source/images/covers/cover4.webp'
+      cover: /images/covers/cover4.webp
     - descr: 强行要凑够六个栏目啊
-      cover: 'source/images/covers/cover5.webp'
+      cover: /images/covers/cover5.webp
     - descr: 关注永雏塔菲喵，关注永雏塔菲谢谢喵
-      cover: 'source/images/covers/cover6.webp'
+      cover: /images/covers/cover6.webp
   custom_css: https://npm.elemecdn.com/hexo-butterfly-categories-card@1.0.0/lib/categorybar.css
 
   # hexo-butterfly-swiper
