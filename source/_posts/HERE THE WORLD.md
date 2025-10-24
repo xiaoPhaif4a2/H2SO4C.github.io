@@ -1,7 +1,8 @@
 ---
 title: HERE THE WORLD
 description: 呐，屏幕前的你，可以让我忘记一切吗
-
+categories: 乐队少女
+swiper_index: 1
 ---
 FEAT SUMIMI
 

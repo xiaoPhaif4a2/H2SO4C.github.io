@@ -1,10 +1,10 @@
 ---
-title: 春日影
+title: 练笔杂记测试
 description: 
     逃跑也无妨 就算看不见道路
     就算迷失方向也渴望持续奔驰
     与你同行
-categories: 乐队少女
+categories: 练笔杂记
 ---
 FEAT MYGO!!!!!
 人知れず
