@@ -508,3 +508,8 @@ tag_plugins:
 aplayerInject:
   enable: true
   per_page: true
+
+favicon:
+  small: /images/favicon.ico
+  medium: /images/favicon.ico
+  apple_touch_icon: /images/favicon.ico
