@@ -1,12 +1,16 @@
 {
-  "name": "hexo-site",
+  "name": "h2so4c-blog",
   "version": "0.0.0",
   "private": true,
+  "description": "Source code for the H2SO4C personal blog.",
   "scripts": {
+    "dev": "hexo server",
     "build": "hexo generate",
     "clean": "hexo clean",
-    "deploy": "hexo deploy",
-    "server": "hexo server"
+    "check": "npm run clean && npm run build"
+  },
+  "engines": {
+    "node": ">=20.19.0"
   },
   "hexo": {
     "version": "8.0.0"
@@ -14,27 +18,21 @@
   "dependencies": {
     "hexo": "^8.0.0",
     "hexo-butterfly-categories-card": "^1.0.0",
-    "hexo-butterfly-clock": "^1.0.7",
     "hexo-butterfly-envelope": "^1.0.15",
     "hexo-butterfly-swiper": "^1.0.12",
     "hexo-butterfly-tag-plugins-plus": "^1.0.18",
-    "hexo-deployer-git": "^4.0.0",
     "hexo-generator-archive": "^2.0.0",
     "hexo-generator-category": "^2.0.0",
     "hexo-generator-index": "^4.0.0",
     "hexo-generator-search": "^2.4.3",
     "hexo-generator-tag": "^2.0.0",
     "hexo-helper-live2d": "^3.1.1",
-    "hexo-renderer-ejs": "^2.0.0",
     "hexo-renderer-kramed": "^0.1.4",
     "hexo-renderer-pug": "^3.0.0",
     "hexo-renderer-stylus": "^3.0.1",
     "hexo-server": "^3.0.0",
     "hexo-tag-aplayer": "^3.0.4",
     "hexo-theme-butterfly": "^5.5.1",
-    "hexo-theme-landscape": "^1.0.0",
-    "hexo-wordcount": "^6.0.1",
-    "live2d-widget-model-koharu": "^1.0.5",
     "live2d-widget-model-z16": "^1.0.5"
   }
 }
