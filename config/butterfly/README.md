@@ -18,4 +18,6 @@ fast if a setting is duplicated, so a later file cannot silently override an
 earlier one.
 
 CategoryBar has its own [name-to-resource mapping](../categorybar.yml), because
-it must match published category names rather than an unstable list position.
+it must cover every published category rather than rely on an unstable list
+position. It may also include planned categories, which display with a count of
+zero until their first article is published.

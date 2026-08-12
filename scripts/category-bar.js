@@ -34,12 +34,14 @@ function renderCategoryBar(categories, config) {
   const mobileHeight = 160 * (config.row ?? 2);
   const desktopHeight = 190 * (config.row ?? 2);
   const itemWidth = columns === 4 ? '24%' : '32.3%';
-  const cards = categories.map((category) => {
-    const resource = config.categories[category.name];
+  const publishedCategories = new Map(categories.map((category) => [category.name, category]));
+  const cards = Object.entries(config.categories).map(([name, resource]) => {
+    const category = publishedCategories.get(name);
     const cover = urlFor(resource.cover).replaceAll("'", '%27');
-    const href = urlFor(category.path);
+    const href = category ? urlFor(category.path) : urlFor(`/${hexo.config.category_dir}/`);
+    const count = category?.length ?? 0;
 
-    return `<li class="categoryBar-list-item" data-category="${escapeHtml(category.name)}" style="background-image: url('${escapeHtml(cover)}');"><a class="categoryBar-list-link" href="${escapeHtml(href)}">${escapeHtml(category.name)}</a><span class="categoryBar-list-count"><i class="categoryBar-list-count-icon fa-solid fa-book" aria-hidden="true"></i>${escapeHtml(category.length)}</span><span class="categoryBar-list-descr">${escapeHtml(resource.description)}</span></li>`;
+    return `<li class="categoryBar-list-item" data-category="${escapeHtml(name)}" style="background-image: url('${escapeHtml(cover)}');"><a class="categoryBar-list-link" href="${escapeHtml(href)}">${escapeHtml(name)}</a><span class="categoryBar-list-count"><i class="categoryBar-list-count-icon fa-solid fa-book" aria-hidden="true"></i>${escapeHtml(count)}</span><span class="categoryBar-list-descr">${escapeHtml(resource.description)}</span></li>`;
   }).join('');
 
   return `<style>li.categoryBar-list-item{width:${itemWidth};}.categoryBar-list{max-height:${desktopHeight}px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width:650px){.categoryBar-list{max-height:${mobileHeight}px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0;"><div id="categoryBar"><ul class="categoryBar-list">${cards}</ul></div></div>`;
@@ -53,14 +55,9 @@ function validateMappings(categories, config) {
   const configuredNames = new Set(Object.keys(config.categories));
   const publishedNames = new Set(categories.map((category) => category.name));
   const missingMappings = [...publishedNames].filter((name) => !configuredNames.has(name));
-  const unusedMappings = [...configuredNames].filter((name) => !publishedNames.has(name));
 
-  if (missingMappings.length > 0 || unusedMappings.length > 0) {
-    const details = [
-      missingMappings.length > 0 && `missing: ${missingMappings.join(', ')}`,
-      unusedMappings.length > 0 && `unused: ${unusedMappings.join(', ')}`
-    ].filter(Boolean).join('; ');
-    throw new Error(`CategoryBar mapping mismatch (${details}).`);
+  if (missingMappings.length > 0) {
+    throw new Error(`CategoryBar mapping mismatch (missing: ${missingMappings.join(', ')}).`);
   }
 
   for (const [name, resource] of Object.entries(config.categories)) {
@@ -78,9 +75,9 @@ hexo.extend.filter.register('before_generate', () => {
 
   const categories = [...hexo.locals.get('categories').data];
   // Hexo server performs one generation pass before its source watcher has
-  // populated the category collection. The watcher immediately triggers a
-  // second pass with the real data, where validation and injection happen.
-  if (categories.length === 0) {
+  // populated the category collection. Skip only when there is also no
+  // configured card to render; configured empty categories are valid.
+  if (categories.length === 0 && Object.keys(config.categories ?? {}).length === 0) {
     return;
   }
 

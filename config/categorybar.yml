@@ -10,6 +10,18 @@ column: odd
 row: 1
 
 categories:
+  汉语言文学:
+    description: 汉语言文学
+    cover: /images/covers/cover1.webp
+
+  英语:
+    description: 英语
+    cover: /images/covers/cover2.webp
+
+  运营:
+    description: 运营
+    cover: /images/covers/cover3.webp
+
   过去的幻影:
     description: 过去的幻影
-    cover: /images/covers/cover1.webp
+    cover: /images/covers/cover4.webp

@@ -26,17 +26,48 @@ function extractCards(markup) {
     const category = match.groups.content.match(/class="categoryBar-list-link"[^>]*>(?<name>[^<]+)<\/a>/)?.groups.name?.trim();
     const description = match.groups.content.match(/class="categoryBar-list-descr">(?<description>[^<]*)<\/span>/)?.groups.description?.trim() ?? '';
     const hasBookIcon = /categoryBar-list-count-icon[^\"]*fa-book/.test(match.groups.content);
+    const count = Number.parseInt(match.groups.content.match(/categoryBar-list-count-icon[^>]*><\/i>(?<count>\d+)</)?.groups.count ?? '', 10);
 
     if (category) {
-      cards.push({ category, cover, description, hasBookIcon });
+      cards.push({ category, cover, description, hasBookIcon, count });
     }
   }
 
   return cards;
 }
 
+function getPublishedCategoryCounts() {
+  const counts = new Map();
+  const postsDirectory = path.join(rootDirectory, 'source', '_posts');
+
+  for (const entry of fs.readdirSync(postsDirectory, { withFileTypes: true })) {
+    if (!entry.isFile() || !entry.name.endsWith('.md')) continue;
+
+    const source = fs.readFileSync(path.join(postsDirectory, entry.name), 'utf8');
+    const frontMatter = source.match(/^---\r?\n(?<data>[\s\S]*?)\r?\n---(?:\r?\n|$)/)?.groups.data;
+    if (!frontMatter) continue;
+
+    const data = yaml.load(frontMatter) ?? {};
+    const categories = data.categories ?? data.category ?? [];
+    const names = Array.isArray(categories) ? categories : [categories];
+
+    for (const category of names) {
+      if (typeof category === 'string') {
+        counts.set(category, (counts.get(category) ?? 0) + 1);
+      }
+    }
+  }
+
+  return counts;
+}
+
 const cards = extractCards(getCategoryMarkup(indexHtml));
 const failures = [];
+const publishedCategoryCounts = getPublishedCategoryCounts();
+
+if (cards.length !== Object.keys(config.categories).length) {
+  failures.push(`expected ${Object.keys(config.categories).length} category cards, received ${cards.length}.`);
+}
 
 for (const [category, expected] of Object.entries(config.categories)) {
   const card = cards.find((candidate) => candidate.category === category);
@@ -56,6 +87,11 @@ for (const [category, expected] of Object.entries(config.categories)) {
 
   if (!card.hasBookIcon) {
     failures.push(`${category}: the count does not contain a Font Awesome book icon.`);
+  }
+
+  const expectedCount = publishedCategoryCounts.get(category) ?? 0;
+  if (card.count !== expectedCount) {
+    failures.push(`${category}: expected count ${expectedCount}, received ${Number.isNaN(card.count) ? '<none>' : card.count}.`);
   }
 }
 
