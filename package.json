@@ -7,10 +7,11 @@
     "config": "node tools/generate-theme-config.cjs",
     "config:check": "node tools/generate-theme-config.cjs --check",
     "verify:categorybar": "node tools/verify-categorybar.cjs",
+    "verify:plugin-removal": "node tools/verify-plugin-removal.cjs",
     "dev": "npm run build && hexo server --static",
     "build": "npm run config && hexo generate",
     "clean": "hexo clean",
-    "check": "npm run clean && npm run build && npm run config:check && npm run verify:categorybar"
+    "check": "npm run clean && npm run build && npm run config:check && npm run verify:categorybar && npm run verify:plugin-removal"
   },
   "engines": {
     "node": ">=20.19.0"
@@ -19,11 +20,8 @@
     "version": "8.0.0"
   },
   "dependencies": {
-    "js-yaml": "^4.1.0",
     "hexo": "^8.0.0",
     "hexo-butterfly-envelope": "^1.0.15",
-    "hexo-butterfly-swiper": "^1.0.12",
-    "hexo-butterfly-tag-plugins-plus": "^1.0.18",
     "hexo-generator-archive": "^2.0.0",
     "hexo-generator-category": "^2.0.0",
     "hexo-generator-index": "^4.0.0",
@@ -33,7 +31,7 @@
     "hexo-renderer-pug": "^3.0.0",
     "hexo-renderer-stylus": "^3.0.1",
     "hexo-server": "^3.0.0",
-    "hexo-tag-aplayer": "^3.0.4",
-    "hexo-theme-butterfly": "^5.5.1"
+    "hexo-theme-butterfly": "^5.5.1",
+    "js-yaml": "^4.1.0"
   }
 }

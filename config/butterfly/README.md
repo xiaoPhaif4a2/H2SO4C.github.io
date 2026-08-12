@@ -8,7 +8,6 @@ generated `_config.butterfly.yml` at the repository root.
 | `site.yml` | Navigation, social links, avatar, covers, top images, favicon, and 404 page |
 | `reading.yml` | Search, code blocks, article metadata, reward, table of contents, and copyright settings |
 | `layout.yml` | Sidebar, footer, colour palette, dark mode, and loading behaviour |
-| `homepage.yml` | Home-page carousel, tag plugins, and music player injection |
 | `community.yml` | Friends links and the message-board envelope |
 
 Run `npm run config` after changing these files, or simply use `npm run dev` or
