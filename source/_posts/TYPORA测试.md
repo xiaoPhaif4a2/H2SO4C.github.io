@@ -2,7 +2,7 @@
 title: typora测试
 description: typora不好用标签外挂。已禁用。
 cover: false
-categories: 测试测试
+categories: 过去的幻影
 ---
 # ~~THIS IS A TEST PAGE OF TYPORA~~
 
