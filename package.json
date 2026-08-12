@@ -4,10 +4,13 @@
   "private": true,
   "description": "Source code for the H2SO4C personal blog.",
   "scripts": {
-    "dev": "hexo server",
-    "build": "hexo generate",
+    "config": "node tools/generate-theme-config.cjs",
+    "config:check": "node tools/generate-theme-config.cjs --check",
+    "verify:categorybar": "node tools/verify-categorybar.cjs",
+    "dev": "npm run build && hexo server --static",
+    "build": "npm run config && hexo generate",
     "clean": "hexo clean",
-    "check": "npm run clean && npm run build"
+    "check": "npm run clean && npm run build && npm run config:check && npm run verify:categorybar"
   },
   "engines": {
     "node": ">=20.19.0"
@@ -16,8 +19,8 @@
     "version": "8.0.0"
   },
   "dependencies": {
+    "js-yaml": "^4.1.0",
     "hexo": "^8.0.0",
-    "hexo-butterfly-categories-card": "^1.0.0",
     "hexo-butterfly-envelope": "^1.0.15",
     "hexo-butterfly-swiper": "^1.0.12",
     "hexo-butterfly-tag-plugins-plus": "^1.0.18",
@@ -26,13 +29,11 @@
     "hexo-generator-index": "^4.0.0",
     "hexo-generator-search": "^2.4.3",
     "hexo-generator-tag": "^2.0.0",
-    "hexo-helper-live2d": "^3.1.1",
     "hexo-renderer-kramed": "^0.1.4",
     "hexo-renderer-pug": "^3.0.0",
     "hexo-renderer-stylus": "^3.0.1",
     "hexo-server": "^3.0.0",
     "hexo-tag-aplayer": "^3.0.4",
-    "hexo-theme-butterfly": "^5.5.1",
-    "live2d-widget-model-z16": "^1.0.5"
+    "hexo-theme-butterfly": "^5.5.1"
   }
 }

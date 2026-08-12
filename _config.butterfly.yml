@@ -1,181 +1,73 @@
-# Butterfly theme configuration
-# Core Hexo settings belong in _config.yml.
+# GENERATED FILE — DO NOT EDIT.
+# Edit config/butterfly/*.yml, then run: npm run config
 
-nav:
-  # Navigation bar logo image
-  display_title: true
-  display_post_title: true
-  # Whether to fix navigation bar
-  fixed: false
-
-menu:
-  首頁: / || fas fa-home
-  時間軸: /archives/ || fas fa-archive
-  標籤: /tags/ || fas fa-tags
-  分類: /categories/ || fas fa-folder-open
-  清單||fa fa-heartbeat:
-    音樂: /music/ || fas fa-music
-    照片: /images/ || fas fa-images
-    電影: /movies/ || fas fa-video
-  留言板: /comments/ || fas fa-envelope-open
-  友鏈: /link/ || fas fa-link
-  關於: /about/ || fas fa-heart
-
-code_blocks:
-  # Code block theme: darker / pale night / light / ocean / false
-  theme: light
-  macStyle: false
-  # Code block height limit (unit: px)
-  height_limit: false
-  word_wrap: false
-
-  # Toolbar
-  copy: true
-  language: true
-  # true: shrink the code blocks | false: expand the code blocks | none: expand code blocks and hide the button
-  shrink: false
-  fullpage: false
-
-# A simple 404 page
-error_404:
+friends:
+  layout: flink
+  title: 友情链接
+  desc: 遇见你们很开心
+  button:
+    text: 申请友链
+    url: /comments/
+envelope_comment:
   enable: true
-  subtitle: "页面沒有找到"
-  background: 
-
-social:
-  fab fa-github: https://github.com/xiaoPhaif4a2 || Github || "#24292f"
-  fas fa-envelope: mailto:2079230695@qq.com || Email || "#000000"
-
-local_search:
+  custom_pic:
+    cover: https://npm.elemecdn.com/hexo-butterfly-envelope/lib/violet.jpg
+    line: https://npm.elemecdn.com/hexo-butterfly-envelope/lib/line.png
+    beforeimg: https://npm.elemecdn.com/hexo-butterfly-envelope/lib/before.png
+    afterimg: https://npm.elemecdn.com/hexo-butterfly-envelope/lib/after.png
+  message:
+    - 有什么想问的？
+    - 有什么想说的？
+    - 有什么想吐槽的？
+    - 哪怕是有什么想吃的，都可以告诉我哦~
+    - 遗憾的是，因为我没有挂评论系统，所以请当面联系我
+    - 欸嘿~
+  bottom: 自动书记人偶竭诚为您服务！
+  height: null
+  path: null
+  front_matter:
+    title: 留言板
+    comments: true
+swiper:
   enable: true
-
-avatar:
-  img: /images/logo2.webp
-  effect: false
-
-cover:
-  # 是否顯示文章封面
-  index_enable: true
-  aside_enable: true
-  archives_enable: true
-  default_cover: 
-  - /images/covers/cover1.webp
-  - /images/covers/cover2.webp
-  - /images/covers/cover3.webp
-  - /images/covers/cover4.webp
-  - /images/covers/cover5.webp
-  - /images/covers/cover6.webp
-   
-# 顏色（HEX值/RGB值/顔色單詞/漸變色)
-# 留空 不顯示背景
-background: /images/background/rover.webp
-
-disable_top_img: false 
-
-# 页面顶图配置
-index_img: '/images/background/head1.webp'  
-
-default_top_img: '/images/background/head1.webp'  
-#     # 主页顶图
-# archive_img: /images/covers/cover4.webp      # 归档页顶图
-
-# tags_img: /images/covers/cover5.webp           # 标签页顶图
-# categories_img: /images/covers/cover2.webp      # 分类页顶图
-# link_img: /images/covers/cover3.webp          # 友链页顶图
-# about_img: /images/covers/cover1.webp        # 关于页顶图
-
-# 页面meta显示
-post_meta:
-  # Home Page
-  page:
-    # Choose: created / updated / both
-    date_type: created
-    # Choose: date / relative
-    date_format: date
-    categories: true
-    tags: false
-    label: true
-  post:
-    # Choose: left / center
-    position: left
-    # Choose: created / updated / both
-    date_type: both
-    # Choose: date / relative
-    date_format: date
-    categories: true
-    tags: true
-    label: true
-
-reward:
-  enable: false
-
-# 主頁subtitle
-subtitle:
+  priority: 5
+  enable_page: /
+  timemode: date
+  layout:
+    type: id
+    name: recent-posts
+    index: 0
+  default_descr: 再怎么看我也不知道怎么描述它的啦！
+  swiper_css: https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css
+  swiper_js: https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js
+  custom_css: https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css
+  custom_js: https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js
+tag_plugins:
   enable: true
-  # Typewriter Effect (打字效果)
-  effect: false
-  # Customize typed.js
-  # https://github.com/mattboldt/typed.js/#customization
-  typed_option:
-  # source 調用第三方服務
-  # false 關閉調用
-  # 1  調用一言網的一句話（簡體） https://hitokoto.cn/
-  # 2  調用一句網（簡體） http://yijuzhan.com/
-  # 3  調用今日詩詞（簡體） https://www.jinrishici.com/
-  # subtitle 會先顯示 source , 再顯示 sub 的內容
-  source: false
-  # 如果關閉打字效果，subtitle 只會顯示 sub 的第一行文字
-  sub:
-    - 大家好我是猫雷，晚上好~
-
-index_layout: 3
-
-# Display the article introduction on homepage
-# 1: description
-# 2: both (if the description exists, it will show description, or show the auto_excerpt)
-# 3: auto_excerpt (default)
-# false: do not show the article introduction
-index_post_content:
-  method: 2
-  # If you set method to 2 or 3, the length need to config
-  length: 500
-
-toc:
-  post: true
-  page: false
-  number: true
-  expand: false
-  # Only for post
-  style_simple: false
-  scroll_percent: true
-
-post_copyright:
-  # 是否啟用版權聲明
+  priority: 5
+  issues: false
+  link:
+    placeholder: /img/link.png
+  CDN:
+    anima: https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css
+    jquery: https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js
+    issues: https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/issues.js
+    iconfont: //at.alicdn.com/t/font_2032782_8d5kxvn09md.js
+    carousel: https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js
+    tag_plugins_css: https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css
+aplayerInject:
   enable: true
-  # 是否進行文章 URL 解碼
-  decode: false
-  # 作者鏈接
-  author_href: https://github.com/xiaoPhaif4a2
-  # 許可證類型
-  license: CC BY-NC-SA 4.0
-  # 許可證鏈接
-  license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
-
+  per_page: true
 footer:
   owner:
     enable: true
     since: 2025
   custom_text: 祝你好运陌生人
-
-
-# 侧边栏
 aside:
   enable: true
   hide: false
-  # Show the button to hide the aside in bottom right button
   button: true
   mobile: true
-  # Position: left / right
   position: right
   display:
     archive: true
@@ -194,74 +86,51 @@ aside:
     content: 欢迎光临
   card_recent_post:
     enable: true
-    # If set 0 will show all
     limit: 0
-    # Sort: date / updated
     sort: date
-    sort_order:
+    sort_order: null
   card_newest_comments:
     enable: false
-    sort_order:
+    sort_order: null
     limit: 6
-    # Unit: mins, save data to localStorage
     storage: 10
     avatar: true
   card_categories:
     enable: true
-    # If set 0 will show all
     limit: 8
-    # Choose: none / true / false
     expand: none
-    sort_order:
+    sort_order: null
   card_tags:
     enable: true
-    # If set 0 will show all
     limit: 40
     color: false
-    # Order of tags, random/name/length
     orderby: length
-    # Sort of order. 1, asc for ascending; -1, desc for descending
     order: 1
-    sort_order:
+    sort_order: null
   card_archives:
     enable: true
-    # Type: monthly / yearly
     type: monthly
-    # Eg: YYYY年MM月
     format: MMMM YYYY
-    # Sort of order. 1, asc for ascending; -1, desc for descending
     order: -1
-    # If set 0 will show all
     limit: 8
-    sort_order:
+    sort_order: null
   card_post_series:
     enable: true
-    # The title shows the series name
     series_title: false
-    # Order by title or date
-    orderBy: 'date'
-    # Sort of order. 1, asc for ascending; -1, desc for descending
+    orderBy: date
     order: -1
   card_webinfo:
     enable: true
     post_count: true
     last_push_date: true
-    sort_order:
-    # Time difference between publish date and now
-    # Formal: Month/Day/Year Time or Year/Month/Day Time
-    # Leave it empty if you don't enable this feature
-    runtime_date:
-
-    # dark mode
+    sort_order: null
+    runtime_date: null
 darkmode:
   enable: true
-  # dark mode和 light mode切換按鈕
   button: true
   autoChangeMode: false
-  # Set the light mode time. The value is between 0 and 24. If not set, the default value is 6 and 18
-  start: # 8
-  end: # 22
-
+  start: null
+  end: null
 theme_color:
   enable: true
   main: '#f6e8b1'
@@ -272,127 +141,111 @@ theme_color:
   meta_color: '#3f376e'
   hr_color: '#3f376e'
   code_foreground: '#3f376e'
-  code_background: 'rgba(27, 31, 35, .05)'
+  code_background: rgba(27, 31, 35, .05)
   toc_color: '#f6e8b1'
   blockquote_padding_color: '#3f376e'
   blockquote_background_color: '#3f376e'
   scrollbar_color: '#3f376e'
   meta_theme_color_light: '#f6e8b1'
   meta_theme_color_dark: '#3f376e'
-
-
-# footer是否顯示圖片背景(與top_img一致)
 footer_img: true
-
-# Add a mask to the header and footer
 mask:
   header: true
   footer: true
-
-# 加載動畫 Loading Animation
 preloader:
   enable: false
-  # source
-  # 1. fullpage-loading
-  # 2. pace (progress bar)
   source: 1
-  # pace theme (see https://codebyzach.github.io/pace/)
-  pace_css_url:
-
-# Friends link
-friends:
-  layout: flink
-  title: 友情链接
-  desc: 遇见你们很开心
-  button:
-    text: 申请友链
-    url: /comments/  # 指向留言板，方便别人申请
-
-# envelope_comment
-# see https://akilar.top/posts/e2d3c450/
-envelope_comment:
-  enable: true #控制开关
-  custom_pic:      
-    cover: https://npm.elemecdn.com/hexo-butterfly-envelope/lib/violet.jpg #信笺头部图片
-    line: https://npm.elemecdn.com/hexo-butterfly-envelope/lib/line.png #信笺底部图片
-    beforeimg: https://npm.elemecdn.com/hexo-butterfly-envelope/lib/before.png # 信封前半部分
-    afterimg: https://npm.elemecdn.com/hexo-butterfly-envelope/lib/after.png # 信封后半部分
-  message: #信笺正文，多行文本，写法如下
-    - 有什么想问的？
-    - 有什么想说的？
-    - 有什么想吐槽的？
-    - 哪怕是有什么想吃的，都可以告诉我哦~
-    - 遗憾的是，因为我没有挂评论系统，所以请当面联系我
-    - 欸嘿~
-  bottom: 自动书记人偶竭诚为您服务！ #仅支持单行文本
-  height: #1050px，信封划出的高度
-  path: #【可选】comments 的路径名称。默认为 comments，生成的页面为 comments/index.html
-  front_matter: #【可选】comments页面的 front_matter 配置
-    title: 留言板
-    comments: true
-
-# hexo-butterfly-categories-card
-# see https://akilar.top/posts/a9131002/
-categoryBar:
-  enable: true # 开关
-  priority: 5 #过滤器优先权
-  enable_page: / # 应用页面
-  layout: # 挂载容器类型
-    type: id
-    name: recent-posts
-    index: 0
-  column: odd # odd：3列 | even：4列
-  row: 1 #显示行数，默认两行，超过行数切换为滚动显示
-  message:
-    - descr: 乐队少女的日常
-      cover: /images/covers/cover1.webp
-    - descr: 博客测试界面
-      cover: /images/covers/cover2.webp
-    - descr: 战争电台
-      cover: /images/covers/cover3.webp
-    - descr: 随便乱写，随便乱放
-      cover: /images/covers/cover4.webp
-    - descr: 强行要凑够六个栏目啊
-      cover: /images/covers/cover5.webp
-    - descr: 关注永雏塔菲喵，关注永雏塔菲谢谢喵
-      cover: /images/covers/cover6.webp
-  custom_css: https://npm.elemecdn.com/hexo-butterfly-categories-card@1.0.0/lib/categorybar.css
-
-  # hexo-butterfly-swiper
-# see https://akilar.top/posts/8e1264d1/
-swiper:
-  enable: true # 开关
-  priority: 5 #过滤器优先权
-  enable_page: / # 应用页面
-  timemode: date #date/updated
-  layout: # 挂载容器类型
-    type: id
-    name: recent-posts
-    index: 0
-  default_descr: 再怎么看我也不知道怎么描述它的啦！
-  swiper_css: https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css #swiper css依赖
-  swiper_js: https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js #swiper js依赖
-  custom_css: https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css # 适配主题样式补丁
-  custom_js: https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js # swiper初始化方法
-
-# tag-plugins-plus
-# see https://akilar.top/posts/615e2dec/
-tag_plugins:
-  enable: true # 开关
-  priority: 5 #过滤器优先权
-  issues: false #issues标签依赖注入开关
-  link:
-    placeholder: /img/link.png #link_card标签默认的图标图片
-  CDN:
-    anima: https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css #动画标签anima的依赖
-    jquery: https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js #issues标签依赖
-    issues: https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/issues.js #issues标签依赖
-    iconfont: //at.alicdn.com/t/font_2032782_8d5kxvn09md.js #参看https://akilar.top/posts/d2ebecef/
-    carousel: https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js
-    tag_plugins_css: https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css
-
-aplayerInject:
+  pace_css_url: null
+code_blocks:
+  theme: light
+  macStyle: false
+  height_limit: false
+  word_wrap: false
+  copy: true
+  language: true
+  shrink: false
+  fullpage: false
+local_search:
   enable: true
-  per_page: true
-
+post_meta:
+  page:
+    date_type: created
+    date_format: date
+    categories: true
+    tags: false
+    label: true
+  post:
+    position: left
+    date_type: both
+    date_format: date
+    categories: true
+    tags: true
+    label: true
+reward:
+  enable: false
+subtitle:
+  enable: true
+  effect: false
+  typed_option: null
+  source: false
+  sub:
+    - 大家好我是猫雷，晚上好~
+index_layout: 3
+index_post_content:
+  method: 2
+  length: 500
+toc:
+  post: true
+  page: false
+  number: true
+  expand: false
+  style_simple: false
+  scroll_percent: true
+post_copyright:
+  enable: true
+  decode: false
+  author_href: https://github.com/xiaoPhaif4a2
+  license: CC BY-NC-SA 4.0
+  license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+nav:
+  display_title: true
+  display_post_title: true
+  fixed: false
+menu:
+  首頁: / || fas fa-home
+  時間軸: /archives/ || fas fa-archive
+  標籤: /tags/ || fas fa-tags
+  分類: /categories/ || fas fa-folder-open
+  清單||fa fa-heartbeat:
+    音樂: /music/ || fas fa-music
+    照片: /images/ || fas fa-images
+    電影: /movies/ || fas fa-video
+  留言板: /comments/ || fas fa-envelope-open
+  友鏈: /link/ || fas fa-link
+  關於: /about/ || fas fa-heart
+error_404:
+  enable: true
+  subtitle: 页面沒有找到
+  background: null
+social:
+  fab fa-github: https://github.com/xiaoPhaif4a2 || Github || "#24292f"
+  fas fa-envelope: mailto:2079230695@qq.com || Email || "#000000"
+avatar:
+  img: /images/logo2.webp
+  effect: false
+cover:
+  index_enable: true
+  aside_enable: true
+  archives_enable: true
+  default_cover:
+    - /images/covers/cover1.webp
+    - /images/covers/cover2.webp
+    - /images/covers/cover3.webp
+    - /images/covers/cover4.webp
+    - /images/covers/cover5.webp
+    - /images/covers/cover6.webp
+background: /images/background/rover.webp
+disable_top_img: false
+index_img: /images/background/head1.webp
+default_top_img: /images/background/head1.webp
 favicon: /images/favicon.ico

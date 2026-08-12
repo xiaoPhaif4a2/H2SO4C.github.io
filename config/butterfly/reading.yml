@@ -1,0 +1,61 @@
+# Article and reading experience
+
+code_blocks:
+  theme: light
+  macStyle: false
+  height_limit: false
+  word_wrap: false
+  copy: true
+  language: true
+  shrink: false
+  fullpage: false
+
+local_search:
+  enable: true
+
+post_meta:
+  page:
+    date_type: created
+    date_format: date
+    categories: true
+    tags: false
+    label: true
+  post:
+    position: left
+    date_type: both
+    date_format: date
+    categories: true
+    tags: true
+    label: true
+
+reward:
+  enable: false
+
+subtitle:
+  enable: true
+  effect: false
+  typed_option:
+  source: false
+  sub:
+    - 大家好我是猫雷，晚上好~
+
+index_layout: 3
+
+index_post_content:
+  method: 2
+  length: 500
+
+toc:
+  post: true
+  page: false
+  number: true
+  expand: false
+  style_simple: false
+  scroll_percent: true
+
+post_copyright:
+  enable: true
+  decode: false
+  author_href: https://github.com/xiaoPhaif4a2
+  license: CC BY-NC-SA 4.0
+  license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/

@@ -1,0 +1,50 @@
+# Navigation and visual identity
+
+nav:
+  display_title: true
+  display_post_title: true
+  fixed: false
+
+menu:
+  首頁: / || fas fa-home
+  時間軸: /archives/ || fas fa-archive
+  標籤: /tags/ || fas fa-tags
+  分類: /categories/ || fas fa-folder-open
+  清單||fa fa-heartbeat:
+    音樂: /music/ || fas fa-music
+    照片: /images/ || fas fa-images
+    電影: /movies/ || fas fa-video
+  留言板: /comments/ || fas fa-envelope-open
+  友鏈: /link/ || fas fa-link
+  關於: /about/ || fas fa-heart
+
+error_404:
+  enable: true
+  subtitle: 页面沒有找到
+  background:
+
+social:
+  fab fa-github: https://github.com/xiaoPhaif4a2 || Github || "#24292f"
+  fas fa-envelope: mailto:2079230695@qq.com || Email || "#000000"
+
+avatar:
+  img: /images/logo2.webp
+  effect: false
+
+cover:
+  index_enable: true
+  aside_enable: true
+  archives_enable: true
+  default_cover:
+    - /images/covers/cover1.webp
+    - /images/covers/cover2.webp
+    - /images/covers/cover3.webp
+    - /images/covers/cover4.webp
+    - /images/covers/cover5.webp
+    - /images/covers/cover6.webp
+
+background: /images/background/rover.webp
+disable_top_img: false
+index_img: /images/background/head1.webp
+default_top_img: /images/background/head1.webp
+favicon: /images/favicon.ico

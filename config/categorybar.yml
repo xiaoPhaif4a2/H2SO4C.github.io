@@ -1,0 +1,30 @@
+# Category cards are keyed by category name so their resources never depend on
+# Hexo's category ordering.
+
+enable: true
+layout:
+  type: id
+  name: recent-posts
+  index: 0
+column: odd
+row: 1
+
+categories:
+  乐队少女:
+    description: 乐队少女的日常
+    cover: /images/covers/cover1.webp
+  测试测试:
+    description: 博客测试界面
+    cover: /images/covers/cover2.webp
+  战争电台:
+    description: 战争电台
+    cover: /images/covers/cover3.webp
+  杂谈杂谈:
+    description: 随便乱写，随便乱放
+    cover: /images/covers/cover4.webp
+  练笔杂记:
+    description: 强行要凑够六个栏目啊
+    cover: /images/covers/cover5.webp
+  资源分享:
+    description: 关注永雏塔菲喵，关注永雏塔菲谢谢喵
+    cover: /images/covers/cover6.webp

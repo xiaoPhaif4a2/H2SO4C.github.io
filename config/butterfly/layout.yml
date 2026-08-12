@@ -1,0 +1,106 @@
+# Shared page layout and visual treatment
+
+footer:
+  owner:
+    enable: true
+    since: 2025
+  custom_text: 祝你好运陌生人
+
+aside:
+  enable: true
+  hide: false
+  button: true
+  mobile: true
+  position: right
+  display:
+    archive: true
+    tag: true
+    category: true
+  card_author:
+    enable: true
+    description: 祝你好运陌生人
+    button:
+      enable: true
+      icon: fab fa-github
+      text: 愿你找到内心的平静
+      link: https://www.bilibili.com/video/BV1GJ411x7h7/?spm_id_from=333.337.search-card.all.click
+  card_announcement:
+    enable: true
+    content: 欢迎光临
+  card_recent_post:
+    enable: true
+    limit: 0
+    sort: date
+    sort_order:
+  card_newest_comments:
+    enable: false
+    sort_order:
+    limit: 6
+    storage: 10
+    avatar: true
+  card_categories:
+    enable: true
+    limit: 8
+    expand: none
+    sort_order:
+  card_tags:
+    enable: true
+    limit: 40
+    color: false
+    orderby: length
+    order: 1
+    sort_order:
+  card_archives:
+    enable: true
+    type: monthly
+    format: MMMM YYYY
+    order: -1
+    limit: 8
+    sort_order:
+  card_post_series:
+    enable: true
+    series_title: false
+    orderBy: date
+    order: -1
+  card_webinfo:
+    enable: true
+    post_count: true
+    last_push_date: true
+    sort_order:
+    runtime_date:
+
+darkmode:
+  enable: true
+  button: true
+  autoChangeMode: false
+  start:
+  end:
+
+theme_color:
+  enable: true
+  main: "#f6e8b1"
+  paginator: "#00c4b6"
+  button_hover: "#3f376e"
+  text_selection: "#3f376e"
+  link_color: "#3f376e"
+  meta_color: "#3f376e"
+  hr_color: "#3f376e"
+  code_foreground: "#3f376e"
+  code_background: rgba(27, 31, 35, .05)
+  toc_color: "#f6e8b1"
+  blockquote_padding_color: "#3f376e"
+  blockquote_background_color: "#3f376e"
+  scrollbar_color: "#3f376e"
+  meta_theme_color_light: "#f6e8b1"
+  meta_theme_color_dark: "#3f376e"
+
+footer_img: true
+
+mask:
+  header: true
+  footer: true
+
+preloader:
+  enable: false
+  source: 1
+  pace_css_url:
