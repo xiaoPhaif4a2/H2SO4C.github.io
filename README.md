@@ -1,12 +1,8 @@
-# H2SO4C Blog
+# H2SO4-blog
 
-This repository contains the source for the H2SO4C personal blog, built with
-[Hexo](https://hexo.io/) and the
-[Butterfly theme](https://github.com/jerryc127/hexo-theme-butterfly).
+H2SO4C 的个人博客，使用 [AstroPaper](https://github.com/satnaing/astro-paper) 构建。
 
-## Commands
-
-The npm scripts are the repository's stable interface:
+## 本地运行
 
 ```bash
 npm ci
@@ -14,45 +10,27 @@ npm run dev
 npm run check
 ```
 
-- `npm run config` compiles the split Butterfly settings into the runtime file
-  Hexo expects.
-- `npm run dev` builds once and serves the same `public/` output used in
-  production. Re-run it after changing source files.
-- `npm run build` compiles theme settings and generates the site in `public/`.
-- `npm run check` performs a clean production build and verifies that the
-  generated theme configuration is current.
+需要 Node.js 22.12 或更高版本。
 
-Deployment is handled by Vercel from the `main` branch. This repository does
-not use `hexo deploy` or keep generated output in Git.
+## 内容结构
 
-## Structure
+- `src/content/posts/YYYY/MM/DD/`：博客文章。目录即文章的永久路径；保留这一规则以兼容已有链接。
+- `src/data/friends.json`：友链数据；页面路径为 `/link/`。
+- `public/images/` 与 `public/audios/`：文章和友链使用的静态资源。
 
-```text
-.
-├── _config.yml              # Core Hexo and site configuration
-├── config/butterfly/         # Editable Butterfly settings, split by concern
-├── config/categorybar.yml    # Name-to-resource mapping for home-page category cards
-├── scripts/                  # Hexo extensions loaded during site generation
-├── tools/                    # Build-time project tooling and output checks
-├── scaffolds/               # Front-matter templates for new content
-├── source/
-│   ├── _data/               # Structured data consumed by the theme
-│   ├── _posts/              # Blog posts
-│   ├── audios/              # Public audio assets
-│   ├── css/                 # Local style overrides
-│   └── images/              # Public image assets
-└── .github/                 # Dependency updates and build verification
+文章 Frontmatter 至少应包含：
+
+```yaml
+title: 文章标题
+description: 文章摘要
+pubDatetime: 2026-08-11T00:00:00+08:00
+tags: []
+categories: []
+legacyPath: 2026/08/11/文章路径
 ```
 
-## Maintenance rules
+`npm run check` 会校验类型、代码格式、构建结果、全部历史文章路径以及友链页。
 
-- Put Hexo/site settings in `_config.yml` and Butterfly settings in
-  `config/butterfly/`. `_config.butterfly.yml` is generated and ignored; do
-  not edit it.
-- Keep public asset paths stable. Moving files under `source/images/` or
-  `source/audios/` changes published URLs.
-- Configure CategoryBar resources by category name in `config/categorybar.yml`.
-  The build rejects missing or unused mappings instead of pairing cards by order.
-- Install the theme and plugins through npm. Do not edit `node_modules/` or add
-  a second theme implementation under `themes/`.
-- Use npm and commit `package-lock.json`; do not add a second lock file.
+## 致谢与许可
+
+本项目基于 [AstroPaper](https://github.com/satnaing/astro-paper)（MIT License）改造。完整许可文本见 [LICENSE](LICENSE)。
