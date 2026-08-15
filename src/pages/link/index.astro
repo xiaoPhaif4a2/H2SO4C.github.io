@@ -1,0 +1,61 @@
+---
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import Layout from "@/layouts/Layout.astro";
+import config from "@/config";
+import { getFriendGroups } from "@/data/friends";
+
+const friendGroups = getFriendGroups();
+---
+
+<Layout title={`友链 | ${config.site.title}`} description="友情链接">
+  <Header />
+  <main id="main-content" class="app-layout py-10">
+    <header class="border-border border-b pb-6">
+      <h1 class="text-accent text-4xl font-bold">友链</h1>
+      <p class="text-muted-foreground mt-3">遇见你们很开心。</p>
+    </header>
+
+    {
+      friendGroups.map(group => (
+        <section
+          class="border-border border-b py-8"
+          aria-labelledby={`group-${group.class_name}`}
+        >
+          <h2 id={`group-${group.class_name}`} class="text-2xl font-semibold">
+            {group.class_name}
+          </h2>
+          <p class="text-muted-foreground mt-2">{group.class_desc}</p>
+          <ul class="mt-6 grid gap-4 sm:grid-cols-2">
+            {group.link_list.map(friend => (
+              <li>
+                <a
+                  href={friend.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  class="border-border hover:border-accent flex h-full items-center gap-4 rounded-lg border p-4 transition-colors"
+                >
+                  <img
+                    src={friend.avatar}
+                    alt=""
+                    width="64"
+                    height="64"
+                    loading="lazy"
+                    class="size-16 rounded-full object-cover"
+                  />
+                  <span>
+                    <span class="block font-medium">{friend.name}</span>
+                    <span class="text-muted-foreground mt-1 block text-sm">
+                      {friend.descr}
+                    </span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </main>
+  <Footer />
+</Layout>

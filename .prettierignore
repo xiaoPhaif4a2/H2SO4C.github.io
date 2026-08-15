@@ -1,0 +1,21 @@
+# Ignore everything
+/*
+
+# Except these files & folders
+!/src
+!/public
+!/.github
+!/tools
+!tsconfig.json
+!astro.config.ts
+!package.json
+!.prettierrc
+!eslint.config.js
+!README.md
+!.vscode
+
+# Ignore MDX files
+*.mdx
+
+# Preserve migrated legacy post bodies byte-for-byte.
+src/content/posts/2026/

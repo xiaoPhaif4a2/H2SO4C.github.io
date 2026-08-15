@@ -1,0 +1,50 @@
+[
+  {
+    "class_name": "超级大神啊",
+    "class_desc": "给超级大神们磕了",
+    "link_list": [
+      {
+        "name": "超级无敌伟大正义ksh大神啊",
+        "link": "https://www.ysss-ee.xyz/",
+        "avatar": "/images/links/ksh-head.png",
+        "descr": "天才啊"
+      },
+      {
+        "name": "超级无敌雷批巨佬bwz大人啊",
+        "link": "https://www.endercrysta2.xyz/link/",
+        "avatar": "/images/links/bwz-head.jpg",
+        "descr": "雷劈啊"
+      },
+      {
+        "name": "开天辟地元始天尊折乙大人啊",
+        "link": "https://zheyi.in/",
+        "avatar": "/images/links/zy-head.gif",
+        "descr": "老人啊"
+      },
+      {
+        "name": "宇宙第一强大可爱psh大人啊",
+        "link": "https://blog.stargazer-luciddream.top/",
+        "avatar": "/images/links/psh-head.jpg",
+        "descr": "组长啊"
+      },
+      {
+        "name": "前端巨佬神秘铁皮wjs大人啊",
+        "link": "https://www.wjsblog.xyz/link/",
+        "avatar": "/images/links/wjs-head.jpeg",
+        "descr": "铁皮啊"
+      },
+      {
+        "name": "超级麝牛超级明星sjs大人啊",
+        "link": "https://chalgen.online/link/",
+        "avatar": "/images/links/sjs-head.webp",
+        "descr": "火批啊"
+      },
+      {
+        "name": "无敌后端铁血胡桃gwt大人啊",
+        "link": "https://blog.scienct.top/",
+        "avatar": "/images/links/gwt-head.png",
+        "descr": "O批啊"
+      }
+    ]
+  }
+]
