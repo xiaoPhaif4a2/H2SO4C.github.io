@@ -13,11 +13,11 @@ const { variant: Heading = "h2", id, data } = Astro.props;
 const { title, description, ...props } = data;
 ---
 
-<li class="my-6">
+<li class="group my-8">
   <a
     href={getPostUrl(data.legacyPath, Astro.currentLocale)}
     class:list={[
-      "text-accent inline-block text-lg font-medium",
+      "text-accent inline-block text-lg font-semibold tracking-tight",
       "decoration-dashed underline-offset-4 hover:underline",
       "focus-visible:no-underline focus-visible:underline-offset-0",
     ]}
@@ -27,5 +27,5 @@ const { title, description, ...props } = data;
     </Heading>
   </a>
   <Datetime {...props} />
-  <p>{description}</p>
+  <p class="text-muted-foreground mt-2 leading-relaxed">{description}</p>
 </li>
