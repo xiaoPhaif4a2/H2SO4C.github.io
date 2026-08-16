@@ -44,7 +44,19 @@
     }
 
     img {
-      @apply border-border mx-auto border;
+      @apply mx-auto max-w-full rounded-xl shadow-sm;
+    }
+
+    figure.article-figure {
+      @apply my-8;
+
+      img {
+        @apply mx-auto max-w-full rounded-xl shadow-sm;
+      }
+
+      figcaption {
+        @apply text-muted-foreground mt-3 text-sm leading-relaxed opacity-90;
+      }
     }
 
     img[role="button"] {
