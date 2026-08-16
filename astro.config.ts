@@ -10,7 +10,9 @@ import sitemap from "@astrojs/sitemap";
 import { unified } from "@astrojs/markdown-remark";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
+import remarkBreaks from "remark-breaks";
 import rehypeCallouts from "rehype-callouts";
+import rehypeFigure from "@microflash/rehype-figure";
 import {
   transformerNotationDiff,
   transformerNotationHighlight,
@@ -40,8 +42,12 @@ export default defineConfig({
       remarkPlugins: [
         remarkToc,
         [remarkCollapse, { test: "Table of contents" }],
+        remarkBreaks,
       ],
-      rehypePlugins: [rehypeCallouts],
+      rehypePlugins: [
+        rehypeCallouts,
+        [rehypeFigure, { className: "article-figure" }],
+      ],
     }),
     shikiConfig: {
       themes: { light: "min-light", dark: "night-owl" },

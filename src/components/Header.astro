@@ -11,6 +11,7 @@ import LinkButton from "./LinkButton.astro";
 import { stripBase, stripLocale } from "@/utils/withBase";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
+import { BLOG_CATEGORIES } from "@/data/categories";
 
 const { site, features } = config;
 
@@ -32,6 +33,8 @@ const isActive = (path: string) => {
   const pathArray = path.split("/").filter(p => p.trim());
   return currentPath === path || currentPathArray[0] === pathArray[0];
 };
+
+const isExactPath = (path: string) => currentPath === path;
 ---
 
 <a
@@ -74,13 +77,60 @@ const isActive = (path: string) => {
         id="menu-items"
         class="[&>li>a]:hover:text-accent mt-4 hidden w-44 grid-cols-2 place-content-center gap-2 sm:mt-0 sm:flex sm:w-auto sm:gap-x-5 sm:gap-y-0 sm:[&>li]:h-8 [&>li>a]:block [&>li>a]:px-4 [&>li>a]:py-3 [&>li>a]:text-center [&>li>a]:font-medium sm:[&>li>a]:px-2 sm:[&>li>a]:py-1"
       >
-        <li class="col-span-2">
-          <a
-            href={getRelativeLocaleUrl(locale, "posts")}
-            class:list={{ "active-nav": isActive("/posts") }}
-          >
-            {t.nav.posts}
-          </a>
+        <li class="col-span-2 sm:relative">
+          <details class="group w-full" data-nav-dropdown>
+            <summary
+              class:list={[
+                "flex w-full cursor-pointer list-none items-center justify-center px-4 py-3 font-medium sm:px-2 sm:py-1",
+                "hover:text-accent [&::-webkit-details-marker]:hidden",
+                {
+                  "active-nav": isActive("/posts") || isActive("/categories"),
+                },
+              ]}
+            >
+              <span>{t.nav.posts}</span>
+              <span aria-hidden="true" class="ms-1 text-xs opacity-70">
+                ▾
+              </span>
+            </summary>
+            <ul
+              class="bg-background mt-2 grid grid-cols-2 gap-1 sm:absolute sm:end-0 sm:top-full sm:z-20 sm:mt-2 sm:w-44 sm:grid-cols-1 sm:p-2 sm:shadow-lg"
+            >
+              <li>
+                <a
+                  href={getRelativeLocaleUrl(locale, "posts")}
+                  class:list={[
+                    "hover:text-accent block w-full px-3 py-2",
+                    { "active-nav": isActive("/posts") },
+                  ]}
+                >
+                  全部文章
+                </a>
+              </li>
+              {
+                BLOG_CATEGORIES.map(category => (
+                  <li>
+                    <a
+                      href={getRelativeLocaleUrl(
+                        locale,
+                        `categories/${category.slug}/`
+                      )}
+                      class:list={[
+                        "hover:text-accent block w-full px-3 py-2",
+                        {
+                          "active-nav": isExactPath(
+                            `/categories/${category.slug}`
+                          ),
+                        },
+                      ]}
+                    >
+                      {category.name}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </details>
         </li>
         <li class="col-span-2">
           <a
@@ -157,6 +207,41 @@ const isActive = (path: string) => {
 </header>
 
 <script>
+  function closeNavDropdowns() {
+    document
+      .querySelectorAll<HTMLDetailsElement>("details[data-nav-dropdown][open]")
+      .forEach(details => details.removeAttribute("open"));
+  }
+
+  function initNavDropdowns() {
+    const dropdownWindow = window as unknown as Record<string, unknown>;
+    if (dropdownWindow.__navDropdownEventsBound) {
+      closeNavDropdowns();
+      return;
+    }
+
+    dropdownWindow.__navDropdownEventsBound = true;
+
+    document.addEventListener("click", event => {
+      const target = event.target as Element;
+      const openDropdowns = document.querySelectorAll<HTMLDetailsElement>(
+        "details[data-nav-dropdown][open]"
+      );
+
+      for (const details of openDropdowns) {
+        if (!details.contains(target)) {
+          details.removeAttribute("open");
+        }
+      }
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        closeNavDropdowns();
+      }
+    });
+  }
+
   function toggleNav() {
     const menuBtn = document.querySelector<HTMLButtonElement>("#menu-btn");
     const menuItems = document.querySelector("#menu-items");
@@ -212,6 +297,9 @@ const isActive = (path: string) => {
 
   toggleNav();
   document.addEventListener("astro:after-swap", toggleNav);
+
+  initNavDropdowns();
+  document.addEventListener("astro:after-swap", initNavDropdowns);
 
   handleSkipToContent();
   document.addEventListener("astro:after-swap", handleSkipToContent);

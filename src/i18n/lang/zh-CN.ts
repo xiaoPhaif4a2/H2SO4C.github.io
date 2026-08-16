@@ -4,6 +4,7 @@ export default {
   nav: {
     home: "首页",
     posts: "文章",
+    categories: "分类",
     tags: "标签",
     about: "关于",
     archives: "归档",
@@ -42,6 +43,10 @@ export default {
     tagDesc: "使用该标签的全部文章",
     tagsTitle: "标签",
     tagsDesc: "文章中使用的全部标签。",
+    categoryTitle: "分类",
+    categoryDesc: "该分类下的全部文章",
+    categoriesTitle: "分类",
+    categoriesDesc: "按分类浏览全部文章。",
     postsTitle: "文章",
     postsDesc: "这里收录全部文章。",
     archivesTitle: "归档",

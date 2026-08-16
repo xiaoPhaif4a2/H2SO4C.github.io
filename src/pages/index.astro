@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
-import IconRss from "@/assets/icons/IconRss.svg";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
@@ -37,22 +36,10 @@ const homePath = getRelativeLocaleUrl(locale, "");
       <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
         H2SO4-blog
       </h1>
-      <a
-        target="_blank"
-        href={`${import.meta.env.BASE_URL.replace(/\/?$/, "/")}rss.xml`}
-        class="inline-block"
-        aria-label="RSS Feed"
-        title="RSS Feed"
-      >
-        <IconRss
-          width={20}
-          height={20}
-          class="stroke-accent scale-125 stroke-3 rtl:-rotate-90"
-        />
-        <span class="sr-only">RSS Feed</span>
-      </a>
 
-      <p>记录听见的旋律、走过的地方，以及尚未命名的片段。</p>
+      <p class="text-muted-foreground max-w-2xl leading-relaxed">
+        祝你好运陌生人。愿你度过愉快的一天。
+      </p>
       {
         socials.length > 0 && (
           <div class="mt-4 flex max-sm:flex-col sm:items-center">
@@ -79,7 +66,7 @@ const homePath = getRelativeLocaleUrl(locale, "");
           </h2>
           <ul>
             {featuredPosts.map(data => (
-              <Card variant="h3" {...data} />
+              <Card {...data} />
             ))}
           </ul>
         </section>
@@ -94,7 +81,7 @@ const homePath = getRelativeLocaleUrl(locale, "");
           </h2>
           <ul>
             {recentPosts.slice(0, postsConfig.perIndex).map(data => (
-              <Card variant="h3" {...data} />
+              <Card {...data} />
             ))}
           </ul>
         </section>

@@ -21,7 +21,7 @@ const posts = defineCollection({
       canonicalURL: z.string().optional(),
       hideEditPost: z.boolean().optional(),
       timezone: z.string().optional(),
-      categories: z.array(z.string()).default([]),
+      categories: z.array(z.string()).default(["其他"]),
       legacyPath: z.string(),
     }),
 });
