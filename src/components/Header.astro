@@ -27,6 +27,7 @@ const pathWithoutTrailingSlash =
     : relativePath;
 
 const currentPath = stripLocale(pathWithoutTrailingSlash, locale);
+const isHomePage = currentPath === "/";
 
 const isActive = (path: string) => {
   const currentPathArray = currentPath.split("/").filter(p => p.trim());
@@ -55,7 +56,7 @@ const isExactPath = (path: string) => currentPath === path;
       href={getRelativeLocaleUrl(locale, "")}
       class="absolute py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:static sm:my-auto sm:text-2xl sm:leading-none"
     >
-      {site.title}
+      {isHomePage ? "Homepage" : site.title}
     </a>
     <nav
       id="nav-menu"
