@@ -1,5 +1,9 @@
 import type { CollectionEntry } from "astro:content";
-import { postFilter } from "./postFilter";
+import { postFilter, postFilterIncludingArchived } from "./postFilter";
+
+type SortOptions = {
+  includeArchived?: boolean;
+};
 
 /**
  * Returns posts that are eligible to be shown to users, sorted by “last updated”
@@ -7,9 +11,16 @@ import { postFilter } from "./postFilter";
  *
  * Note: filtering respects drafts and scheduled posts via `postFilter()`.
  */
-export function getSortedPosts(posts: CollectionEntry<"posts">[]) {
+export function getSortedPosts(
+  posts: CollectionEntry<"posts">[],
+  options: SortOptions = {}
+) {
+  const filter = options.includeArchived
+    ? postFilterIncludingArchived
+    : postFilter;
+
   return posts
-    .filter(postFilter)
+    .filter(filter)
     .sort(
       (a, b) =>
         Math.floor(

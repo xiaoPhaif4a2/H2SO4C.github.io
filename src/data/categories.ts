@@ -5,7 +5,17 @@ export type BlogCategory = {
   slug: string;
 };
 
-const categoryNames = ["文学", "英语", "计算机", "产品运营", "其他"];
+export const ARCHIVED_CATEGORY_NAME = "已归档";
+export const ARCHIVED_CATEGORY_SLUG = slugifyStr(ARCHIVED_CATEGORY_NAME);
+
+const categoryNames = [
+  "文学",
+  "英语",
+  "计算机",
+  "产品运营",
+  "其他",
+  ARCHIVED_CATEGORY_NAME,
+];
 
 export const BLOG_CATEGORIES: BlogCategory[] = categoryNames.map(name => ({
   name,
