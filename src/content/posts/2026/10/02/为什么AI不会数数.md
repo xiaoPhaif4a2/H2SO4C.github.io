@@ -1,5 +1,5 @@
 ---
-title: 为什么 AI 不会数数？我让它们写了五千字
+title: 为什么 AI 不会数数
 description: 精确字数已经是部分 AI 系统可以完成的任务
 pubDatetime: "2026-10-02T00:00:00+08:00"
 tags:
