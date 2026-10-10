@@ -50,6 +50,41 @@ for (const post of manifest.posts) {
     errors.push(`missing historical route: /${post.legacyPath}/`);
 }
 
+const heroPostPath = "2026/10/10/英雄的发生";
+const heroMarkdown = fs.readFileSync(
+  path.join(postsDirectory, `${heroPostPath}.md`),
+  "utf8"
+);
+const heroHtml = fs.readFileSync(
+  path.join(root, "dist", heroPostPath, "index.html"),
+  "utf8"
+);
+const expectedBoldTexts = Array.from(
+  getMarkdownBody(heroMarkdown).matchAll(/\*\*([^\n]+?)\*\*/g),
+  match => match[1]
+);
+for (const text of expectedBoldTexts) {
+  if (!heroHtml.includes(`<strong>${text}</strong>`)) {
+    errors.push(`missing rendered bold text in ${heroPostPath}: ${text}`);
+  }
+}
+if (
+  Array.from(heroHtml.matchAll(/<p>[\s\S]*?<\/p>/g)).some(match =>
+    match[0].includes("**")
+  )
+) {
+  errors.push(`unrendered bold markers in ${heroPostPath}`);
+}
+for (const heading of [
+  "一、从价值选择到命定道路",
+  "二、功绩，责任，公正",
+  "三、英雄是怎样被讲述的",
+]) {
+  if (!heroHtml.includes(`>${heading}</h2>`)) {
+    errors.push(`missing level-two section in ${heroPostPath}: ${heading}`);
+  }
+}
+
 const migratedPostCount = fs
   .readdirSync(path.join(postsDirectory, "2026", "08", "11"))
   .filter(file => file.endsWith(".md")).length;
