@@ -22,7 +22,7 @@
     }
 
     h2 {
-      @apply border-border/80 mt-10 mb-4 border-b pb-2 text-2xl font-semibold tracking-tight;
+      @apply mt-10 mb-4 text-2xl font-semibold tracking-tight;
     }
 
     h3 {
