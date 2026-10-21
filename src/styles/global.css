@@ -45,11 +45,19 @@
 }
 
 @utility max-w-app {
-  @apply max-w-6xl;
+  max-width: 112rem;
 }
 
 @utility app-layout {
-  @apply max-w-app mx-auto w-full px-4;
+  @apply max-w-app mx-auto w-full;
+  padding-inline: clamp(1rem, 4vw, 6rem);
+}
+
+@utility reading-layout {
+  @apply app-layout;
+  /* Grow with the viewport while keeping long articles comfortable to scan. */
+  max-width: clamp(48rem, 84vw, 106rem);
+  padding-inline: clamp(1rem, 2vw, 3rem);
 }
 
 @utility active-nav {

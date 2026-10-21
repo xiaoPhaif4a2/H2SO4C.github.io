@@ -102,8 +102,8 @@ const friendCount = friends.reduce(
   (count, group) => count + group.link_list.length,
   0
 );
-if (friendCount !== 7)
-  errors.push(`expected 7 friend links, received ${friendCount}`);
+if (friendCount !== 8)
+  errors.push(`expected 8 friend links, received ${friendCount}`);
 
 if (errors.length > 0) {
   process.stderr.write("Content verification failed:\n");

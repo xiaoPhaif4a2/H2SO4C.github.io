@@ -4,8 +4,8 @@
   /* ===== Override default Tailwind Typography styles ===== */
   .app-prose {
     @apply prose;
-    font-size: 1.0625rem;
-    line-height: 1.85;
+    font-size: clamp(1.0625rem, 0.9rem + 0.35vw, 1.3125rem);
+    line-height: 1.95;
 
     h1,
     h2,
@@ -53,7 +53,8 @@
     }
 
     p {
-      @apply text-foreground leading-relaxed;
+      @apply text-foreground;
+      margin-block: 1.5em;
     }
 
     ul {
@@ -65,7 +66,7 @@
     }
 
     li {
-      @apply marker:text-accent ps-1 leading-relaxed;
+      @apply marker:text-accent ps-1;
     }
 
     hr {
