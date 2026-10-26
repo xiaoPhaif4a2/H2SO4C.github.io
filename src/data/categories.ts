@@ -10,6 +10,7 @@ export const ARCHIVED_CATEGORY_SLUG = slugifyStr(ARCHIVED_CATEGORY_NAME);
 
 const categoryNames = [
   "文学",
+  "历史",
   "英语",
   "计算机",
   "产品运营",
