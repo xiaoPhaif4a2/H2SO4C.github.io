@@ -1,0 +1,199 @@
+.share-panel {
+  display: block;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  scroll-margin-top: 1.5rem;
+}
+
+.share-url {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  background: var(--background);
+  font-size: 0.85rem;
+}
+
+.share-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.share-panel button,
+.share-download {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.share-panel button:hover,
+.share-download:hover {
+  background: var(--muted);
+}
+
+.share-panel button:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+.share-hint {
+  margin-top: 0.5rem;
+  color: var(--muted-foreground);
+  font-size: 0.8rem;
+}
+
+.share-dialog {
+  position: fixed;
+  inset: 0;
+  width: min(48rem, calc(100% - 2rem));
+  max-height: 90dvh;
+  margin: auto;
+  padding: 1.25rem;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  color: var(--foreground);
+  background: var(--background);
+}
+
+.share-dialog::backdrop {
+  background: rgb(0 0 0 / 65%);
+}
+
+.share-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.share-result {
+  margin-block: 1.5rem;
+}
+
+.share-result img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-block: 0.75rem;
+  border: 1px solid var(--border);
+}
+
+.share-download {
+  display: inline-block;
+}
+
+/* A fixed paper palette keeps exports readable in either site theme. */
+.share-capture {
+  --background: #fdfbf6;
+  --foreground: #35304a;
+  --accent: #3f376e;
+  --muted: #efe8d5;
+  --muted-foreground: #7a728c;
+  --border: #e3d7b9;
+  width: 720px;
+  color: var(--foreground);
+  background: var(--background);
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: 18px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+
+.share-card-content {
+  padding: 44px;
+}
+
+.share-card-header {
+  margin-bottom: 32px;
+  padding-bottom: 28px;
+  border-bottom: 2px solid var(--border);
+}
+
+.share-card-brand {
+  color: var(--accent);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.share-card-header h1 {
+  margin: 20px 0 14px;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.share-card-meta,
+.share-card-link {
+  color: var(--muted-foreground);
+  font-size: 14px;
+}
+
+.share-capture .app-prose {
+  font-size: 18px;
+  line-height: 1.9;
+}
+
+.share-capture .app-prose details:not(.callout) {
+  display: block;
+}
+
+.share-capture .app-prose details[open] p {
+  display: block;
+}
+
+.share-capture .app-prose pre {
+  padding: 16px;
+  color: #35304a;
+  background: #efe8d5;
+  white-space: pre-wrap;
+}
+
+.share-capture .app-prose pre span {
+  color: var(--shiki-light, inherit) !important;
+}
+
+.share-capture .app-prose img {
+  max-width: 100%;
+  height: auto;
+}
+
+.share-capture .app-prose table {
+  width: 100%;
+  table-layout: fixed;
+  font-size: 14px;
+}
+
+.share-capture .app-prose :is(pre, code, td, th) {
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.share-media-note {
+  padding: 16px;
+  border: 1px dashed var(--border);
+  color: var(--muted-foreground);
+  font-size: 15px;
+}
+
+.share-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 2px solid var(--border);
+  font-size: 15px;
+}
+
+.share-card-footer img {
+  flex-shrink: 0;
+}

@@ -16,7 +16,7 @@
     "format:check": "prettier --check .",
     "format": "prettier --write .",
     "lint": "eslint .",
-    "check": "npm run lint && npm run format:check && npm run build && node tools/verify-content.mjs"
+    "check": "npm run lint && npm run format:check && npm run build && node tools/verify-content.mjs && node tools/verify-sharing.mjs"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.2.0",
@@ -27,7 +27,9 @@
     "@tailwindcss/vite": "^4.3.2",
     "astro": "^7.0.3",
     "dayjs": "^1.11.21",
+    "html-to-image": "^1.11.13",
     "lodash.kebabcase": "^4.1.1",
+    "qrcode": "^1.5.4",
     "rehype-callouts": "^2.2.0",
     "remark-breaks": "^4.0.0",
     "remark-collapse": "^0.1.2",
@@ -43,6 +45,7 @@
     "@shikijs/transformers": "^4.3.0",
     "@tailwindcss/typography": "^0.5.20",
     "@types/lodash.kebabcase": "^4.1.9",
+    "@types/qrcode": "^1.5.6",
     "@typescript-eslint/parser": "^8.62.0",
     "eslint": "^10.6.0",
     "eslint-plugin-astro": "^2.1.1",

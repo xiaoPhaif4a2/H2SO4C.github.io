@@ -128,6 +128,8 @@ const ogImage = ogImageUrl
       <EditPost {hideEditPost} {post} class="max-sm:hidden" />
     </div>
 
+    <ShareLinks {post} />
+
     <article
       id="article"
       class:list={[
@@ -149,7 +151,9 @@ const ogImage = ogImageUrl
       {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />)}
     </ul>
 
-    <ShareLinks />
+    <a href="#post-share" class="text-accent underline underline-offset-4">
+      分享链接 / 生成正文长图 ↑
+    </a>
 
     <hr class="my-8 border-dashed" />
 
@@ -193,7 +197,7 @@ const ogImage = ogImageUrl
 
   function addHeadingLinks() {
     const headings = Array.from(
-      document.querySelectorAll("h2, h3, h4, h5, h6")
+      document.querySelectorAll("#article :is(h2, h3, h4, h5, h6)")
     );
     for (const heading of headings) {
       heading.classList.add("group");

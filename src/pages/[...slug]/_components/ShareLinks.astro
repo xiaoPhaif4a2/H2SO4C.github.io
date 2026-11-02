@@ -1,54 +1,121 @@
 ---
+import type { CollectionEntry } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import QRCode from "qrcode";
 import LinkButton from "@/components/LinkButton.astro";
+import { getShortPostId } from "@/utils/getShortPostId";
 import { tplStr, useTranslations } from "@/i18n";
 import config from "@/config";
+import "@/styles/share-card.css";
 
-const { shareLinks } = config;
+type Props = { post: CollectionEntry<"posts"> };
+const { post } = Astro.props;
 const t = useTranslations(Astro.currentLocale);
-
+const shortPath = getRelativeLocaleUrl(
+  Astro.currentLocale ?? config.site.lang,
+  `s/${getShortPostId(post.data.legacyPath)}/`
+);
+const shareUrl = new URL(shortPath, Astro.site).href;
+const qrCode = await QRCode.toDataURL(shareUrl, {
+  width: 176,
+  margin: 4,
+  errorCorrectionLevel: "M",
+});
+const date = new Intl.DateTimeFormat("zh-CN", {
+  timeZone: post.data.timezone ?? config.site.timezone,
+  dateStyle: "long",
+}).format(post.data.pubDatetime);
 const icons = import.meta.glob<{
   default: (_props: Record<string, unknown>) => unknown;
 }>("/src/assets/icons/socials/*.svg");
-
-const pageUrl = Astro.url;
-
-const platformLabel = (name: string) =>
-  name.charAt(0).toUpperCase() + name.slice(1);
-
 const items = await Promise.all(
-  shareLinks.map(async ({ name, url, linkTitle }) => {
+  config.shareLinks.map(async ({ name, url, linkTitle }) => {
     const mod = await icons[`/src/assets/icons/socials/${name}.svg`]?.();
-    const Icon = mod?.default;
     const title =
       linkTitle ??
       (name === "mail"
         ? t.post.sharePostViaEmail
-        : tplStr(t.post.sharePostOn, { platform: platformLabel(name) }));
-    return { url, title, Icon };
+        : tplStr(t.post.sharePostOn, { platform: name }));
+    return { url, title, Icon: mod?.default };
   })
 );
 ---
 
-{
-  items.some(({ Icon }) => Icon) && (
-    <div class="flex flex-none flex-col items-center justify-center gap-1 md:items-start">
-      <span class="italic">{t.post.sharePostIntro}</span>
-      <div class="text-center">
-        {items.map(({ url, title, Icon }) =>
-          Icon ? (
-            <LinkButton
-              href={`${url}${pageUrl}`}
-              class="scale-90 p-2 hover:rotate-6 sm:p-1"
-              title={title}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Icon class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" />
-              <span class="sr-only">{title}</span>
-            </LinkButton>
-          ) : null
-        )}
-      </div>
+<post-share
+  id="post-share"
+  class="share-panel"
+  data-title={post.data.title}
+  data-pagefind-ignore
+>
+  <p class="mb-2 font-semibold">分享这篇文章</p>
+  <label class="sr-only" for="post-share-url">文章短链接</label>
+  <input
+    id="post-share-url"
+    data-share-url
+    class="share-url"
+    type="text"
+    readonly
+    value={shareUrl}
+    spellcheck="false"
+  />
+  <div class="share-actions">
+    <button type="button" data-copy="text" hidden>复制分享文案</button>
+    <button type="button" data-copy="url" hidden>仅复制链接</button>
+    <button type="button" data-native-share hidden>系统分享</button>
+    <button type="button" data-generate-card hidden>生成正文长图</button>
+    {
+      items.map(({ url, title, Icon }) =>
+        Icon ? (
+          <LinkButton
+            href={`${url}${encodeURIComponent(shareUrl)}`}
+            title={title}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon class="size-5 fill-none stroke-current" />
+            <span class="sr-only">{title}</span>
+          </LinkButton>
+        ) : null
+      )
+    }
+  </div>
+  <p data-share-status role="status" class="share-hint">
+    分享文案包含文章标题和短链接。
+  </p>
+  <noscript><p>选中上方短链接即可复制分享。</p></noscript>
+
+  <dialog class="share-dialog" aria-labelledby="share-dialog-title">
+    <div class="share-dialog-header">
+      <h2 id="share-dialog-title" class="text-lg font-bold">正文长图</h2>
+      <button type="button" data-close-card autofocus>关闭</button>
     </div>
-  )
-}
+    <p class="share-hint">
+      可下载图片，也可在手机上长按图片保存。长文会自动分成多张。
+    </p>
+    <p data-card-status role="status" class="my-3"></p>
+    <div data-card-results></div>
+    <button type="button" data-retry-card hidden>重新生成</button>
+  </dialog>
+
+  <template data-card-header>
+    <header class="share-card-header">
+      <p class="share-card-brand">{config.site.title}</p>
+      <h1>{post.data.title}</h1>
+      <p class="share-card-meta">{post.data.author} · {date}</p>
+    </header>
+  </template>
+  <template data-card-footer>
+    <footer class="share-card-footer">
+      <div>
+        <p class="share-card-brand">{config.site.title}</p>
+        <p>扫码阅读全文与音视频内容</p>
+        <p class="share-card-link">{shareUrl}</p>
+      </div>
+      <img src={qrCode} width="132" height="132" alt="原文二维码" />
+    </footer>
+  </template>
+</post-share>
+
+<script>
+  import "@/scripts/post-share";
+</script>

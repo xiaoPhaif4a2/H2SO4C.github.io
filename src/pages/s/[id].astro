@@ -1,0 +1,43 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import { getSortedPosts } from "@/utils/getSortedPosts";
+import { getPostUrl } from "@/utils/getPostPaths";
+import { getShortPostId } from "@/utils/getShortPostId";
+
+export async function getStaticPaths() {
+  const posts = getSortedPosts(await getCollection("posts"), {
+    includeArchived: true,
+  });
+  const ids = new Set<string>();
+  return posts.map(post => {
+    const id = getShortPostId(post.data.legacyPath);
+    if (ids.has(id)) throw new Error(`Duplicate short post ID: ${id}`);
+    ids.add(id);
+    return { params: { id }, props: { post } };
+  });
+}
+
+type Props = { post: CollectionEntry<"posts"> };
+const { post } = Astro.props;
+const target = getPostUrl(post.data.legacyPath, Astro.currentLocale);
+const canonical = new URL(post.data.canonicalURL ?? target, Astro.site).href;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href={canonical} />
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <title>{post.data.title}</title>
+    <meta name="description" content={post.data.description} />
+    <meta property="og:title" content={post.data.title} />
+    <meta property="og:description" content={post.data.description} />
+    <meta property="og:url" content={canonical} />
+  </head>
+  <body>
+    <p>正在打开文章：<a href={target}>{post.data.title}</a></p>
+  </body>
+</html>
