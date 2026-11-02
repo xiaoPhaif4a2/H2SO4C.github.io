@@ -2,15 +2,12 @@
 import type { CollectionEntry } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import QRCode from "qrcode";
-import LinkButton from "@/components/LinkButton.astro";
 import { getShortPostId } from "@/utils/getShortPostId";
-import { tplStr, useTranslations } from "@/i18n";
 import config from "@/config";
 import "@/styles/share-card.css";
 
 type Props = { post: CollectionEntry<"posts"> };
 const { post } = Astro.props;
-const t = useTranslations(Astro.currentLocale);
 const shortPath = getRelativeLocaleUrl(
   Astro.currentLocale ?? config.site.lang,
   `s/${getShortPostId(post.data.legacyPath)}/`
@@ -25,20 +22,6 @@ const date = new Intl.DateTimeFormat("zh-CN", {
   timeZone: post.data.timezone ?? config.site.timezone,
   dateStyle: "long",
 }).format(post.data.pubDatetime);
-const icons = import.meta.glob<{
-  default: (_props: Record<string, unknown>) => unknown;
-}>("/src/assets/icons/socials/*.svg");
-const items = await Promise.all(
-  config.shareLinks.map(async ({ name, url, linkTitle }) => {
-    const mod = await icons[`/src/assets/icons/socials/${name}.svg`]?.();
-    const title =
-      linkTitle ??
-      (name === "mail"
-        ? t.post.sharePostViaEmail
-        : tplStr(t.post.sharePostOn, { platform: name }));
-    return { url, title, Icon: mod?.default };
-  })
-);
 ---
 
 <post-share
@@ -47,42 +30,44 @@ const items = await Promise.all(
   data-title={post.data.title}
   data-pagefind-ignore
 >
-  <p class="mb-2 font-semibold">分享这篇文章</p>
-  <label class="sr-only" for="post-share-url">文章短链接</label>
-  <input
-    id="post-share-url"
-    data-share-url
-    class="share-url"
-    type="text"
-    readonly
-    value={shareUrl}
-    spellcheck="false"
-  />
-  <div class="share-actions">
-    <button type="button" data-copy="text" hidden>复制分享文案</button>
-    <button type="button" data-copy="url" hidden>仅复制链接</button>
-    <button type="button" data-native-share hidden>系统分享</button>
-    <button type="button" data-generate-card hidden>生成正文长图</button>
-    {
-      items.map(({ url, title, Icon }) =>
-        Icon ? (
-          <LinkButton
-            href={`${url}${encodeURIComponent(shareUrl)}`}
-            title={title}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Icon class="size-5 fill-none stroke-current" />
-            <span class="sr-only">{title}</span>
-          </LinkButton>
-        ) : null
-      )
-    }
+  <button
+    type="button"
+    class="share-trigger"
+    data-share-trigger
+    aria-expanded="false"
+    aria-controls="post-share-menu"
+    hidden>分享</button
+  >
+  <input type="hidden" data-share-url value={shareUrl} />
+  <div id="post-share-menu" class="share-menu" data-share-menu hidden>
+    <div class="share-actions" role="group" aria-label="分享选项">
+      <button type="button" data-copy="url">
+        <svg viewBox="0 0 24 24" aria-hidden="true"
+          ><path
+            d="M10 13a5 5 0 0 0 7 .2l3-3a5 5 0 0 0-7-7l-2 2M14 11a5 5 0 0 0-7-.2l-3 3a5 5 0 0 0 7 7l2-2"
+          ></path></svg
+        >
+        分享链接
+      </button>
+      <button type="button" data-copy="text">
+        <svg viewBox="0 0 24 24" aria-hidden="true"
+          ><rect x="8" y="8" width="12" height="13" rx="2"></rect><path
+            d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3M11 12h6M11 16h4"
+          ></path></svg
+        >
+        复制文案
+      </button>
+      <button type="button" data-generate-card>
+        <svg viewBox="0 0 24 24" aria-hidden="true"
+          ><rect x="5" y="2" width="14" height="20" rx="2"></rect><path
+            d="M9 6h6M9 10h6M8 18l3-4 3 3 2-2 3 3"></path></svg
+        >
+        生成长图
+      </button>
+    </div>
+    <p data-share-status role="status" class="share-menu-status"></p>
   </div>
-  <p data-share-status role="status" class="share-hint">
-    分享文案包含文章标题和短链接。
-  </p>
-  <noscript><p>选中上方短链接即可复制分享。</p></noscript>
+  <noscript><a href={shareUrl}>分享</a></noscript>
 
   <dialog class="share-dialog" aria-labelledby="share-dialog-title">
     <div class="share-dialog-header">

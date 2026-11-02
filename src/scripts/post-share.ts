@@ -19,7 +19,58 @@ class PostShare extends HTMLElement {
     const retry = this.querySelector<HTMLButtonElement>("[data-retry-card]")!;
     const title = this.dataset.title ?? "文章";
 
-    urlInput.addEventListener("click", () => urlInput.select(), { signal });
+    const trigger = this.querySelector<HTMLButtonElement>(
+      "[data-share-trigger]"
+    )!;
+    const menu = this.querySelector<HTMLElement>("[data-share-menu]")!;
+    const closeMenu = (restoreFocus = false) => {
+      menu.hidden = true;
+      trigger.setAttribute("aria-expanded", "false");
+      if (restoreFocus) trigger.focus();
+    };
+    trigger.hidden = false;
+    trigger.addEventListener(
+      "click",
+      () => {
+        const open = menu.hidden;
+        menu.hidden = !open;
+        trigger.setAttribute("aria-expanded", String(open));
+        if (open) {
+          status.textContent = "";
+          menu.querySelector<HTMLButtonElement>("button")?.focus();
+        }
+      },
+      { signal }
+    );
+    document.addEventListener(
+      "click",
+      event => {
+        if (event.target instanceof Node && !this.contains(event.target))
+          closeMenu();
+      },
+      { signal }
+    );
+    this.addEventListener(
+      "keydown",
+      event => {
+        if (event.key === "Escape" && !menu.hidden) {
+          event.preventDefault();
+          closeMenu(true);
+        }
+      },
+      { signal }
+    );
+    this.addEventListener(
+      "focusout",
+      event => {
+        if (
+          event.relatedTarget instanceof Node &&
+          !this.contains(event.relatedTarget)
+        )
+          closeMenu();
+      },
+      { signal }
+    );
     this.querySelectorAll<HTMLButtonElement>("[data-copy]").forEach(button => {
       button.hidden = false;
       button.addEventListener(
@@ -42,28 +93,6 @@ class PostShare extends HTMLElement {
         { signal }
       );
     });
-
-    const native = this.querySelector<HTMLButtonElement>(
-      "[data-native-share]"
-    )!;
-    native.hidden = typeof navigator.share !== "function";
-    native.addEventListener(
-      "click",
-      async () => {
-        try {
-          await navigator.share({
-            title,
-            text: `【${title}】`,
-            url: urlInput.value,
-          });
-        } catch (error) {
-          if (!(error instanceof DOMException && error.name === "AbortError")) {
-            status.textContent = "系统分享暂不可用，可以复制分享文案。";
-          }
-        }
-      },
-      { signal }
-    );
 
     const buildCards = async () => {
       if (this.generation && !this.generation.signal.aborted) return;
@@ -124,6 +153,7 @@ class PostShare extends HTMLElement {
     generate.addEventListener(
       "click",
       () => {
+        closeMenu();
         this.previousOverflow = document.body.style.overflow;
         document.body.style.overflow = "hidden";
         dialog.showModal();
@@ -142,6 +172,7 @@ class PostShare extends HTMLElement {
       () => {
         this.generation?.abort();
         this.restoreScroll();
+        trigger.focus();
       },
       { signal }
     );

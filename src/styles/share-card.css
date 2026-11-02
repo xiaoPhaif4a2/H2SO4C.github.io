@@ -1,30 +1,75 @@
 .share-panel {
-  display: block;
-  margin-top: 1.5rem;
-  padding: 1rem;
-  border: 1px solid var(--border);
-  border-radius: 0.75rem;
-  scroll-margin-top: 1.5rem;
+  position: relative;
+  display: inline-block;
+  font-size: 0.875rem;
 }
 
-.share-url {
-  width: 100%;
-  padding: 0.5rem 0.75rem;
+.share-trigger {
+  padding-block: 0.25rem;
+  color: var(--foreground);
+}
+
+.share-trigger:hover,
+.share-trigger[aria-expanded="true"] {
+  color: var(--accent);
+}
+
+.share-menu {
+  position: absolute;
+  z-index: 30;
+  right: 0;
+  bottom: calc(100% + 0.75rem);
+  width: 11rem;
+  padding: 0.4rem;
   border: 1px solid var(--border);
-  border-radius: 0.4rem;
+  border-radius: 0.65rem;
+  color: var(--foreground);
   background: var(--background);
-  font-size: 0.85rem;
+  box-shadow: 0 6px 24px color-mix(in srgb, var(--accent) 14%, transparent);
 }
 
 .share-actions {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
+  flex-direction: column;
+  gap: 0.15rem;
 }
 
-.share-panel button,
+.share-actions button {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border-radius: 0.4rem;
+  text-align: left;
+}
+
+.share-actions button:hover,
+.share-actions button:focus-visible {
+  color: var(--accent);
+  background: var(--muted);
+}
+
+.share-actions svg {
+  flex-shrink: 0;
+  width: 1.15rem;
+  height: 1.15rem;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.share-menu-status:not(:empty) {
+  padding: 0.5rem 0.8rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted-foreground);
+  font-size: 0.75rem;
+  overflow-wrap: anywhere;
+}
+
+.share-dialog button,
 .share-download {
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--border);
@@ -32,14 +77,9 @@
   font-size: 0.85rem;
 }
 
-.share-panel button:hover,
+.share-dialog button:hover,
 .share-download:hover {
   background: var(--muted);
-}
-
-.share-panel button:disabled {
-  cursor: wait;
-  opacity: 0.6;
 }
 
 .share-hint {
