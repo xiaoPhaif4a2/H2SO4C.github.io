@@ -91,26 +91,62 @@
 .share-dialog {
   position: fixed;
   inset: 0;
-  width: min(48rem, calc(100% - 2rem));
-  max-height: 90dvh;
+  width: min(48rem, calc(100% - 3rem));
+  max-height: none;
   margin: auto;
-  padding: 1.25rem;
-  overflow-y: auto;
-  border: 1px solid var(--border);
-  border-radius: 0.75rem;
+  padding: 0;
+  overflow: visible;
+  border: 0;
   color: var(--foreground);
-  background: var(--background);
+  background: transparent;
 }
 
 .share-dialog::backdrop {
   background: rgb(0 0 0 / 65%);
 }
 
-.share-dialog-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+.share-preview-shell {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--background);
+}
+
+.share-preview-scroll {
+  max-height: 88dvh;
+  padding: 1.25rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-radius: inherit;
+}
+
+.share-preview-scroll h2 {
+  padding-right: 2.75rem;
+}
+
+.share-dialog .share-preview-close {
+  position: absolute;
+  z-index: 2;
+  top: 0.65rem;
+  right: 0.65rem;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0.45rem;
+  border-radius: 50%;
+  color: var(--accent);
+  background: var(--background);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.share-preview-close svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
 }
 
 .share-result {

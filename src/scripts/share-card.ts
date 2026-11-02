@@ -1,8 +1,6 @@
 import { toBlob } from "html-to-image";
 
 const WIDTH = 720;
-// At 1.5x, each canvas stays below 4096px and 5 megapixels for mobile browsers.
-const MAX_HEIGHT = 2600;
 
 type Options = {
   signal: AbortSignal;
@@ -10,7 +8,7 @@ type Options = {
 };
 
 /** Render an isolated copy; expanding details and wrapping code never changes the post. */
-export async function createArticleCards(root: HTMLElement, options: Options) {
+export async function createArticleCard(root: HTMLElement, options: Options) {
   const { signal, onProgress } = options;
   const original = document.getElementById("article");
   if (!original) throw new Error("Article not found");
@@ -89,56 +87,36 @@ export async function createArticleCards(root: HTMLElement, options: Options) {
     );
     signal.throwIfAborted();
     const height = Math.ceil(content.getBoundingClientRect().height);
-    // Prefer paragraph boundaries, keeping ordinary paragraphs and figures intact.
-    const contentTop = content.getBoundingClientRect().top;
-    const boundaries = Array.from(
-      content.querySelectorAll(
-        ".share-card-header, .share-card-body > :not(:last-child), .share-card-footer"
-      ),
-      element => Math.ceil(element.getBoundingClientRect().bottom - contentTop)
+    onProgress("正在生成完整长图…");
+    frame.style.height = `${height}px`;
+    // Keep the entire article in one image; scale uniformly for very large canvases.
+    const pixelRatio = Math.min(
+      1.5,
+      16384 / height,
+      Math.sqrt(16000000 / (WIDTH * height))
     );
-    const slices: { top: number; height: number }[] = [];
-    let top = 0;
-    while (top < height) {
-      const limit = Math.min(height, top + MAX_HEIGHT);
-      const candidates = boundaries.filter(
-        bottom => bottom > top + MAX_HEIGHT / 2 && bottom <= limit
-      );
-      const end = limit === height ? height : (candidates.at(-1) ?? limit);
-      slices.push({ top, height: end - top });
-      top = end;
-    }
-
-    const output: Blob[] = [];
-    for (const [index, slice] of slices.entries()) {
-      signal.throwIfAborted();
-      onProgress(`正在生成第 ${index + 1}/${slices.length} 张长图…`);
-      frame.style.height = `${slice.height}px`;
-      content.style.transform = `translateY(-${slice.top}px)`;
-      const blob = await toBlob(frame, {
-        width: WIDTH,
-        height: slice.height,
-        pixelRatio: 1.5,
-        backgroundColor: "#fdfbf6",
-        // Exports use system fonts; no remote font or stylesheet requests are needed.
-        skipFonts: true,
-        // Chromium also copies logical insets from the offscreen capture node.
-        style: {
-          position: "relative",
-          left: "0",
-          top: "0",
-          right: "auto",
-          bottom: "auto",
-          insetInlineStart: "0",
-          insetInlineEnd: "auto",
-          insetBlockStart: "0",
-          insetBlockEnd: "auto",
-        },
-      });
-      if (!blob) throw new Error("Canvas export failed");
-      output.push(blob);
-    }
-    return { images: output, missingImages };
+    const image = await toBlob(frame, {
+      width: WIDTH,
+      height,
+      pixelRatio,
+      backgroundColor: "#fdfbf6",
+      skipFonts: true,
+      // Reset both physical and logical offscreen offsets in the exported clone.
+      style: {
+        position: "relative",
+        left: "0",
+        top: "0",
+        right: "auto",
+        bottom: "auto",
+        insetInlineStart: "0",
+        insetInlineEnd: "auto",
+        insetBlockStart: "0",
+        insetBlockEnd: "auto",
+      },
+    });
+    if (!image) throw new Error("Canvas export failed");
+    signal.throwIfAborted();
+    return { image, missingImages };
   } finally {
     frame.remove();
   }

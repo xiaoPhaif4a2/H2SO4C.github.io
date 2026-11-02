@@ -76,16 +76,10 @@ class PostShare extends HTMLElement {
       button.addEventListener(
         "click",
         async () => {
-          const text =
-            button.dataset.copy === "url"
-              ? urlInput.value
-              : `【${title}】${urlInput.value}`;
+          const text = `【${title}】${urlInput.value}`;
           try {
             await copyText(text);
-            status.textContent =
-              button.dataset.copy === "url"
-                ? "短链接已复制。"
-                : "分享文案已复制。";
+            status.textContent = "分享链接已复制。";
           } catch {
             status.textContent = `自动复制被浏览器拦截，请手动复制：${text}`;
           }
@@ -105,9 +99,9 @@ class PostShare extends HTMLElement {
       const { signal: generationSignal } = generation;
       cardStatus.textContent = "正在整理全文与配图…";
       try {
-        const { createArticleCards } = await import("./share-card");
+        const { createArticleCard } = await import("./share-card");
         generationSignal.throwIfAborted();
-        const { images, missingImages } = await createArticleCards(this, {
+        const { image: blob, missingImages } = await createArticleCard(this, {
           signal: generationSignal,
           onProgress: text => (cardStatus.textContent = text),
         });
@@ -115,23 +109,21 @@ class PostShare extends HTMLElement {
         const filename = title
           .replace(/[<>:"/\\|?*\u0000-\u001f]/g, "_")
           .slice(0, 80);
-        images.forEach((blob, index) => {
-          const url = URL.createObjectURL(blob);
-          this.imageUrls.push(url);
-          const figure = document.createElement("figure");
-          figure.className = "share-result";
-          const image = new Image();
-          image.src = url;
-          image.alt = `${title} · 正文长图 ${index + 1}/${images.length}`;
-          const download = document.createElement("a");
-          download.className = "share-download";
-          download.href = url;
-          download.download = `${filename}-${index + 1}.png`;
-          download.textContent = `下载图片 ${index + 1}/${images.length}`;
-          figure.append(download, image);
-          results.append(figure);
-        });
-        cardStatus.textContent = `已生成 ${images.length} 张正文长图。${
+        const url = URL.createObjectURL(blob);
+        this.imageUrls.push(url);
+        const figure = document.createElement("figure");
+        figure.className = "share-result";
+        const image = new Image();
+        image.src = url;
+        image.alt = `${title} · 完整正文长图`;
+        const download = document.createElement("a");
+        download.className = "share-download";
+        download.href = url;
+        download.download = `${filename}.png`;
+        download.textContent = "下载完整长图";
+        figure.append(download, image);
+        results.append(figure);
+        cardStatus.textContent = `完整长图已生成。${
           missingImages > 0
             ? `有 ${missingImages} 张配图无法读取，已保留提示，请扫码在原文查看。`
             : ""
@@ -156,6 +148,8 @@ class PostShare extends HTMLElement {
         closeMenu();
         this.previousOverflow = document.body.style.overflow;
         document.body.style.overflow = "hidden";
+        dialog.querySelector<HTMLElement>("[data-preview-scroll]")!.scrollTop =
+          0;
         dialog.showModal();
         if (this.imageUrls.length === 0) void buildCards();
       },
@@ -165,6 +159,22 @@ class PostShare extends HTMLElement {
     this.querySelector("[data-close-card]")!.addEventListener(
       "click",
       () => dialog.close(),
+      { signal }
+    );
+    let backdropPress = false;
+    dialog.addEventListener(
+      "pointerdown",
+      event => {
+        backdropPress = event.target === dialog;
+      },
+      { signal }
+    );
+    dialog.addEventListener(
+      "click",
+      event => {
+        if (backdropPress && event.target === dialog) dialog.close();
+        backdropPress = false;
+      },
       { signal }
     );
     dialog.addEventListener(

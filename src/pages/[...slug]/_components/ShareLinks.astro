@@ -41,21 +41,13 @@ const date = new Intl.DateTimeFormat("zh-CN", {
   <input type="hidden" data-share-url value={shareUrl} />
   <div id="post-share-menu" class="share-menu" data-share-menu hidden>
     <div class="share-actions" role="group" aria-label="分享选项">
-      <button type="button" data-copy="url">
-        <svg viewBox="0 0 24 24" aria-hidden="true"
-          ><path
-            d="M10 13a5 5 0 0 0 7 .2l3-3a5 5 0 0 0-7-7l-2 2M14 11a5 5 0 0 0-7-.2l-3 3a5 5 0 0 0 7 7l2-2"
-          ></path></svg
-        >
-        分享链接
-      </button>
       <button type="button" data-copy="text">
         <svg viewBox="0 0 24 24" aria-hidden="true"
           ><rect x="8" y="8" width="12" height="13" rx="2"></rect><path
             d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3M11 12h6M11 16h4"
           ></path></svg
         >
-        复制文案
+        分享链接
       </button>
       <button type="button" data-generate-card>
         <svg viewBox="0 0 24 24" aria-hidden="true"
@@ -70,16 +62,26 @@ const date = new Intl.DateTimeFormat("zh-CN", {
   <noscript><a href={shareUrl}>分享</a></noscript>
 
   <dialog class="share-dialog" aria-labelledby="share-dialog-title">
-    <div class="share-dialog-header">
-      <h2 id="share-dialog-title" class="text-lg font-bold">正文长图</h2>
-      <button type="button" data-close-card autofocus>关闭</button>
+    <div class="share-preview-shell">
+      <button
+        type="button"
+        class="share-preview-close"
+        data-close-card
+        aria-label="关闭长图预览"
+        autofocus
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true"
+          ><path d="m6 6 12 12M18 6 6 18"></path></svg
+        >
+      </button>
+      <div class="share-preview-scroll" data-preview-scroll>
+        <h2 id="share-dialog-title" class="text-lg font-bold">正文长图</h2>
+        <p class="share-hint">全文保留在一张图片中，可下载或长按保存。</p>
+        <p data-card-status role="status" class="my-3"></p>
+        <div data-card-results></div>
+        <button type="button" data-retry-card hidden>重新生成</button>
+      </div>
     </div>
-    <p class="share-hint">
-      可下载图片，也可在手机上长按图片保存。长文会自动分成多张。
-    </p>
-    <p data-card-status role="status" class="my-3"></p>
-    <div data-card-results></div>
-    <button type="button" data-retry-card hidden>重新生成</button>
   </dialog>
 
   <template data-card-header>
