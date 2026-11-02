@@ -5,9 +5,15 @@
     "link_list": [
       {
         "name": "超级无敌伟大正义ksh大神啊",
-        "link": "https://www.ysss-ee.xyz/",
+        "link": "https://blog.yssso.cn/",
         "avatar": "/images/links/ksh-head.png",
         "descr": "天才啊"
+      },
+      {
+        "name": "画画前端美术大神csn大人啊",
+        "link": "https://xiaoxiaofeng.uno/index.html",
+        "avatar": "/images/links/csn-head.png",
+        "descr": "全能啊"
       },
       {
         "name": "超级无敌雷批巨佬bwz大人啊",
@@ -49,7 +55,7 @@
         "name": "万能之人超级萌物yym大人啊",
         "link": "https://daoyezongzi.org/",
         "avatar": "/images/links/yym-head.jpg",
-        "descr": "全才啊"
+        "descr": "文青啊"
       }
     ]
   }
