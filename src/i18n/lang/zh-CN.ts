@@ -13,6 +13,7 @@ export default {
   post: {
     publishedAt: "发布于",
     updatedAt: "更新于",
+    wordCount: "{{count}} 字",
     sharePostIntro: "分享文章：",
     sharePostOn: "分享到 {{platform}}",
     sharePostViaEmail: "通过邮件分享文章",

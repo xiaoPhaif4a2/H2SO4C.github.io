@@ -1,0 +1,24 @@
+---
+import config from "@/config";
+import { tplStr, useTranslations } from "@/i18n";
+
+type Props = {
+  count: number;
+  size?: "sm" | "lg";
+};
+
+const { count, size = "sm" } = Astro.props;
+const locale = Astro.currentLocale ?? config.site.lang;
+const t = useTranslations(locale);
+---
+
+<span
+  class:list={[
+    "text-muted-foreground text-sm whitespace-nowrap",
+    { "sm:text-base": size === "lg" },
+  ]}
+  data-word-count={count}
+  data-pagefind-ignore
+>
+  {tplStr(t.post.wordCount, { count: count.toLocaleString(locale) })}
+</span>

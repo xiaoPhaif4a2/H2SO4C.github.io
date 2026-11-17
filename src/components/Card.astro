@@ -3,6 +3,8 @@ import type { CollectionEntry } from "astro:content";
 import { getPostUrl } from "@/utils/getPostPaths";
 import { toTransitionName } from "@/utils/toTransitionName";
 import Datetime from "./Datetime.astro";
+import WordCount from "./WordCount.astro";
+import { getWordCount } from "@/utils/getWordCount";
 
 type Props = {
   variant?: "h2" | "h3";
@@ -11,6 +13,7 @@ type Props = {
 const { variant: Heading = "h2", id, data } = Astro.props;
 
 const { title, description, ...props } = data;
+const wordCount = getWordCount(Astro.props.rendered?.html ?? "");
 ---
 
 <li class="group my-8">
@@ -26,6 +29,9 @@ const { title, description, ...props } = data;
       {title}
     </Heading>
   </a>
-  <Datetime {...props} />
+  <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+    <Datetime {...props} />
+    <WordCount count={wordCount} />
+  </div>
   <p class="text-muted-foreground mt-2 leading-relaxed">{description}</p>
 </li>

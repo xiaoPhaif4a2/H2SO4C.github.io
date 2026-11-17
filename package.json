@@ -16,7 +16,7 @@
     "format:check": "prettier --check .",
     "format": "prettier --write .",
     "lint": "eslint .",
-    "check": "npm run lint && npm run format:check && npm run build && node tools/verify-content.mjs && node tools/verify-sharing.mjs"
+    "check": "npm run lint && npm run format:check && npm run build && node tools/verify-content.mjs && node tools/verify-sharing.mjs && node --experimental-strip-types tools/verify-word-count.mjs"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.2.0",
@@ -29,6 +29,7 @@
     "dayjs": "^1.11.21",
     "html-to-image": "^1.11.13",
     "lodash.kebabcase": "^4.1.1",
+    "parse5": "^8.1.1",
     "qrcode": "^1.5.4",
     "rehype-callouts": "^2.2.0",
     "remark-breaks": "^4.0.0",

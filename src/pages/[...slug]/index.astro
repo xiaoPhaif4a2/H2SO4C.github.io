@@ -4,6 +4,8 @@ import PostLayout from "@/layouts/PostLayout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Datetime from "@/components/Datetime.astro";
+import WordCount from "@/components/WordCount.astro";
+import { getWordCount } from "@/utils/getWordCount";
 import Tag from "@/components/Tag.astro";
 import { getPostSlug, getPostUrl } from "@/utils/getPostPaths";
 import { getSortedPosts } from "@/utils/getSortedPosts";
@@ -73,6 +75,7 @@ const {
 } = post.data;
 
 const { Content } = await render(post);
+const wordCount = getWordCount(post.rendered?.html ?? "");
 
 let ogImageUrl: string | undefined;
 
@@ -114,8 +117,9 @@ const ogImage = ogImageUrl
       {title}
     </h1>
 
-    <div class="my-2 flex items-center gap-2">
+    <div class="my-2 flex flex-wrap items-center gap-x-3 gap-y-1">
       <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
+      <WordCount count={wordCount} size="lg" />
       <span
         aria-hidden="true"
         class:list={[

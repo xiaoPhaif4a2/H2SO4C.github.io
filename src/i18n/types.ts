@@ -11,6 +11,7 @@ export interface UIStrings {
   post: {
     publishedAt: string;
     updatedAt: string;
+    wordCount: string;
     sharePostIntro: string;
     sharePostOn: string;
     sharePostViaEmail: string;
